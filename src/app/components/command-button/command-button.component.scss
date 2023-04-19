@@ -1,0 +1,12 @@
+.inline {
+    button {
+        background-color: transparent !important;
+        border: none;
+    }
+    .bi-code-slash::before{
+        color: black !important;
+    }
+    .dropdown-toggle::after{
+        color: black;
+    }
+}

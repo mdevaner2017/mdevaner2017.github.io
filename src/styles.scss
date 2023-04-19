@@ -1,0 +1,67 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
+@import "~bootstrap-icons/font/bootstrap-icons.css";
+@import "~@ng-select/ng-select/themes/default.theme.css";
+
+
+.back-blue{
+    background-color: #286daf;
+}
+.color-white{
+    color: white;
+}
+.back-white{
+    background-color: white;
+}
+
+.btn-primary:focus, .btn-primary.focus {
+    color: #fff;
+    background-color: #0069d9;
+    border-color: #0062cc;
+    box-shadow: 0 0 0 0.2rem rgb(38 143 255 / 50%);
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.btn-transparent{
+    background-color: transparent;
+    border: none;
+}
+
+.bi-lock-fill::before, .bi-unlock-fill::before{
+    color:#17a2b8 !important;
+}
+.bi-pen-fill::before{
+    color: midnightblue;
+}
+.back{
+    width: 100%;
+    background-color: antiquewhite;
+    border: solid 1px darkgray;
+    border-radius: 10px;
+}
+p:focus{
+    color: #3083ff;
+}
+
+#terminalOutput {
+    p {
+        margin: 0 !important;
+    }
+}
+
+.nav-link {
+    margin-left: 5px;
+    color: #fff;
+}

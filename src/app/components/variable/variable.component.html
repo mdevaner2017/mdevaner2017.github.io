@@ -1,0 +1,70 @@
+<div class="mb-2 d-flex col-12 align-items-center px-2 back" [id]="'variable-' + index">
+    <div *ngIf="!isHidden" class="col-lg-9 d-flex justify-content-start">
+        <p class="mb-0" [id]="'variable-cod-' + index" tabindex="0">
+            <span *ngIf="variable.type == 'INTEGER'">{{ "VARIABLE.INT" | translate }} </span>
+            <span *ngIf="variable.type == 'DOUBLE'">{{ "VARIABLE.REAL" | translate }}  </span>
+            <span *ngIf="variable.type == 'STRING'">{{ "VARIABLE.TEXT" | translate }}  </span>
+            <span *ngIf="variable.type == 'BOOLEAN'">{{ "VARIABLE.LOGIC" | translate }}  </span>
+            <span>{{variable.name}}</span>
+            <span aria-hidden="true">&lsaquo;-</span>
+            <span class="sr-only" tabindex="0">{{ "GENERAL.RECEIVE" | translate }}</span>
+            <span>{{variable.value}};</span>
+        </p>
+    </div>
+
+    <div *ngIf="isHidden" class="row p-2 variable-item col-lg-9">
+        <div class="col-xl-3 col-lg-3 col-md-3">
+            <select [id]="'variable-type-' + index" name="tipo" class="form-control" [title]="'VARIABLE.TYPE' | translate"
+                (change)="changeType()" [(ngModel)]="variable.type">
+                <option value="INTEGER">{{ "VARIABLE.INT" | translate }}</option>
+                <option value="DOUBLE">{{ "VARIABLE.REAL" | translate }}</option>
+                <option value="STRING">{{ "VARIABLE.TEXT" | translate }}</option>
+                <option value="BOOLEAN">{{ "VARIABLE.LOGIC" | translate }}</option>
+            </select>
+
+            <!-- <ng-select id="variable-type-{{index}}" #ngSelect class="form-control" title="Tipo da variável" (change)="changeType()" [(ngModel)]="variable.type">
+                <ng-option [value]="'INTEGER'">inteiro</ng-option>
+                <ng-option [value]="'DOUBLE'">real</ng-option>
+                <ng-option [value]="'STRING'">texto</ng-option>
+                <ng-option [value]="'BOOLEAN'">lógico</ng-option>
+             </ng-select> -->
+        </div>
+
+        <div class="col-xl-3 col-lg-3 col-md-3 col-xs-12">
+            <input id="variable-name-{{index}}" type="text" class="form-control" title="nome da variável" [(ngModel)]="variable.name" (keyup.enter)="focusElement('variable-value-' + index)" />
+        </div>
+
+        <div class="col-xl-1 col-lg-2 col-md-2 col-xs-12 d-flex align-items-center">
+            <span for="receive" tabindex="0"[title]="'GENERAL.RECEIVE' | translate">{{ "GENERAL.RECEIVE" | translate }}</span>
+        </div>
+
+        <div class="col-xl-3 col-lg-3 col-xs-12 col-md-3" *ngIf="variable.type == 'INTEGER' || variable.type == 'DOUBLE'">
+            <input id="variable-value-{{index}}" type="number" class="form-control" [title]="'VARIABLE.TYPE' | translate" [(ngModel)]="variable.value">
+        </div>
+
+        <div class="col-xl-3 col-lg-3 col-xs-12 col-md-3" *ngIf="variable.type == 'STRING'">
+            <input id="variable-value-{{index}}" type="text" class="form-control" [title]="'VARIABLE.TYPE' | translate" [(ngModel)]="variable.value">
+        </div>
+
+        <div class="col-xl-3 col-lg-3 col-xs-12 col-md-3" *ngIf="variable.type == 'BOOLEAN'">
+            <select id="variable-value-{{index}}" name="tipo" class="form-control" [title]="'VARIABLE.TYPE' | translate" [(ngModel)]="variable.value">
+                <option [ngValue]="'verdadeiro'">{{ "GENERAL.TRUE" | translate }}</option>
+                <option [ngValue]="'falso'">{{ "GENERAL.FALSE" | translate }}</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="col-lg-3">
+        <div class="d-flex justify-content-end">
+            <app-command-button *ngIf="hasToggle" [mode]="'inline'" [text]="false" [title]="'Comandos'" [components]="components"
+            [variables]="variables"></app-command-button>
+            <button class="btn btn-transparent" (click)="toggleHidden()">
+                <span *ngIf="isHidden" class="bi bi-unlock-fill" [title]="'GENERAL.READ_CODE' | translate"></span>
+                <span *ngIf="!isHidden" class="bi bi-lock-fill" [title]="'GENERAL.READ_EDIT' | translate"></span>
+            </button>
+
+            <button class="btn btn-transparent text-danger pr-2" (click)="removeVariable()"
+            [title]="'GENERAL.READ_DELETE' | translate"><span aria-hidden="true">X</span></button>
+        </div>
+    </div>
+</div>

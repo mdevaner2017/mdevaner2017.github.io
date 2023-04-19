@@ -1,0 +1,254 @@
+<div class="mb-2 col-lg-12 px-1 back" [ngClass]="back == true ? 'new-back' : ''" id="conditional">
+    <div class="row py-2 px-4 content">
+        <div *ngIf="!isHidden" class="col-lg-8 d-flex justify-content-start">
+            <p class="mb-0 text-left" [id]="'conditional-cod-'+ index" tabindex="0">
+                <span [innerHTML]="commandsPlainText"></span>
+            </p>
+        </div>
+
+        <div *ngIf="isHidden" class="d-flex flex-column col-8 col-lg-9 conditional">
+            <div class="d-flex flex-wrap">
+                <div class="d-flex justify-content-center align-items-center">
+                    <span class="rigth" tabindex="0">{{'GENERAL.IF' | translate }}</span>
+                    <span aria-hidden="true">&#40; </span>
+                    <span tabindex="0" aria-hidden="false" class="sr-only">{{'GENERAL.OPEN_PARENTHESES' | translate }}</span>
+                </div>
+
+                <div class="d-flex align-items-center" *ngFor="let op of conditionals">
+                    <div class="col">
+                        <select class="form-select" id="conditional-op-{{index}}-{{op.index}}" *ngIf="op.type != 'CONDITIONAL'"
+                            [(ngModel)]="op.type" (change)="clearValue(op)">
+                            <option [ngValue]="''" selected>{{ "GENERAL.SELECT" | translate }}</option>
+                            <option [ngValue]="'VARIABLE'">{{ "GENERAL.VARIABLE" | translate }}</option>
+                            <option [ngValue]="'VALUE'">{{ "GENERAL.VALUE" | translate }}</option>
+                        </select>
+                    </div>
+
+                    <div class="col">
+                        <select id="conditional-op-{{index}}-{{op.index}}" class="ml-2 form-select" *ngIf="op.type == 'VARIABLE'" 
+                            [(ngModel)]="op.value" (change)="changeValue()">
+                            <option *ngIf="!variables.length" disabled [ngValue]="''">{{ "GENERAL.NOT_VARIABLE" | translate }}</option>
+                            <option *ngIf="variables.length && op.value ==''" disabled [ngValue]="''">{{ "GENERAL.SELECT_VARIABLE" | translate }}</option>
+                            <option *ngFor="let v of variables" [ngValue]="v.value.name">{{v.value.name}}</option>
+                        </select>
+                    </div>
+
+                    <div class="col">
+                        <input id="conditional-op-{{index}}-{{op.index}}" class="form-control" *ngIf="op.type == 'VALUE'" 
+                            [(ngModel)]="op.valueString" (keyup)="changeInputValue(op)" type="text" [placeholder]="'GENERAL.DIGIT_VALUE' | translate" />
+                    </div>
+
+                    <div class="col">
+                        <div ngbDropdown class="d-inline-block conditional-dropdown"  *ngIf="op.type == 'CONDITIONAL'">
+                            <button type="button" class="btn btn-outline-primary" id="conditional-op-{{index}}-{{op.index}}" tabindex="0" ngbDropdownToggle>
+                                <span tabindex="0">{{ op.value == '' ? 'Selecione a condição' : op.value }}</span>
+                                <!-- <span class="sr-only" tabindex="0">Selecione a condição</span> -->
+                            </button>
+
+                            <div ngbDropdownMenu attr.aria-labelledby="conditional-op-{{index}}-{{op.index}}">
+                                <div ngbDropdown placement="right">
+                                    <button type="button" class="btn btn-outline-primary" id="dropdown-conditional-{{index}}-{{op.index}}-aritmeticos"
+                                        ngbDropdownToggle>{{'GENERAL.MATH' | translate }}</button>
+                                    <div ngbDropdownMenu attr.aria-labelledby="dropdown-conditional-{{index}}-{{op.index}}-aritmeticos">
+                                        <button ngbDropdownItem (click)="changeConditional(op, '+', op.index)">
+                                            <span>&#43;</span>
+                                        </button>
+                                        <button ngbDropdownItem (click)="changeConditional(op, '-', op.index)">
+                                            <span>&minus;</span>
+                                        </button>
+                                        <button ngbDropdownItem (click)="changeConditional(op, '*', op.index)">
+                                            <span aria-hidden="true">&lowast;</span>
+                                            <span aria-hidden="false" class="sr-only">{{'GENERAL.MULTPLICATION' | translate }}</span>
+                                        </button>
+                                        <button ngbDropdownItem (click)="changeConditional(op, '/', op.index)">
+                                            <span>&divide;</span>
+                                        </button>
+                                        <button ngbDropdownItem (click)="changeConditional(op, '%', op.index)">
+                                            <span>%</span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div ngbDropdown placement="right">
+                                    <button type="button" class="btn btn-outline-primary" id="dropdown-conditional-{{index}}-{{op.index}}-logicos"
+                                        ngbDropdownToggle>{{'GENERAL.LOGIC' | translate }}</button>
+                                    <div ngbDropdownMenu attr.aria-labelledby="dropdown-conditional-{{index}}-{{op.index}}-logicos">
+                                        <button ngbDropdownItem (click)="changeConditional(op, '==', op.index)">
+                                            <span>&#61;&#61;</span>
+                                        </button>
+                                        <button ngbDropdownItem (click)="changeConditional(op, 'E', op.index)">
+                                            <span>{{'GENERAL.AND' | translate }}</span>
+                                        </button>
+                                        <button ngbDropdownItem (click)="changeConditional(op, 'OU', op.index)">
+                                            <span>{{'GENERAL.OR' | translate }}</span>
+                                        </button>
+                                        <button ngbDropdownItem (click)="changeConditional(op, 'nao', op.index)">
+                                            <span>{{'GENERAL.NO' | translate }}</span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div ngbDropdown placement="right">
+                                    <button type="button" class="btn btn-outline-primary" id="dropdown-conditional-{{index}}-{{op.index}}-relacionais"
+                                        ngbDropdownToggle>{{'GENERAL.RELATIONAL' | translate }}</button>
+                                    <div ngbDropdownMenu attr.aria-labelledby="dropdown-conditional-{{index}}-{{op.index}}-relacionais">
+                                        <button ngbDropdownItem (click)="changeConditional(op, '>', op.index)">
+                                            <span>&#62;</span>
+                                        </button>
+                                        <button ngbDropdownItem (click)="changeConditional(op, '<', op.index)">
+                                            <span>&#60;</span>
+                                        </button>
+                                        <button ngbDropdownItem (click)="changeConditional(op, '==', op.index)">
+                                            <span>&#61;&#61;</span>
+                                        </button>
+                                        <button ngbDropdownItem (click)="changeConditional(op, '!=', op.index)">
+                                            <span aria-hidden="true">!&#61;</span>
+                                            <span aria-hidden="false" class="sr-only">{{'GENERAL.EXCLAMATION' | translate }}</span>
+                                        </button>
+                                        <button ngbDropdownItem (click)="changeConditional(op, '>=', op.index)">
+                                            <span>&#8805;</span>
+                                        </button>
+                                        <button ngbDropdownItem (click)="changeConditional(op, '<=', op.index)">
+                                            <span>&#8804;</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-center align-items-center">
+                    <button class="btn btn-primary more mr-2" *ngIf="conditionals.length" type="button" (click)="addConditional()">
+                        <strong aria-hidden="true">+</strong>
+                        <strong aria-hidden="false" class="sr-only">{{'GENERAL.CONDITIONAL' | translate }}</strong>
+                    </button>
+                </div>
+
+                <div class="d-flex justify-content-center align-items-center">
+                    <span aria-hidden="true">)</span>
+                    <span tabindex="0" aria-hidden="false" class="sr-only">{{'GENERAL.CLOSE_PARENTHESES' | translate }}</span>
+                </div>
+
+                <div>
+                    <span tabindex="0">{{'GENERAL.ELSE' | translate }}</span>
+                    <app-command-button 
+                        [mode]="'inline'" 
+                        [title]="'Adicionar comandos na condição'" 
+                        [hasVariables]="false"
+                        [components]="conditional.condition.components"
+                        [variables]="variables"
+                        [text]="false" 
+                        [iconComands]="false"    
+                    ></app-command-button>
+                </div>
+
+                <div class="d-flex justify-content-center align-items-center">
+                    <button class="trash" [title]="'GENERAL.CLEAN' | translate" (click)="clear()"><i class="bi bi-trash"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-4 col-lg-3">
+            <app-command-button *ngIf="hasToggle"
+                [mode]="'inline'" 
+                [text]="false" 
+                [title]="'Comandos'" 
+                [components]="components"
+                [variables]="variables"
+            ></app-command-button>
+            <button class="btn btn-transparent" (click)="toggleHidden()">
+                <span *ngIf="isHidden" class="bi bi-unlock-fill"  [title]="'GENERAL.READ_CODE' | translate"><span class="sr-only">{{ "GENERAL.READ_CODE" | translate }}</span></span>
+                <span *ngIf="!isHidden" class="bi bi-lock-fill" [title]="'GENERAL.READ_EDIT' | translate"><span class="sr-only">{{ "GENERAL.READ_EDIT" | translate }}</span></span>
+            </button>
+
+            <button class="btn btn-transparent text-danger pr-2" (click)="removeConditional()" [title]="'GENERAL.REMOVE_COMANDS' | translate "><span aria-hidden="true">X</span></button>
+        </div>
+
+        <div *ngIf="isHidden" class="d-flex flex-column col-12 col-lg-12 conditional">
+            <div class="row d-flex flex-wrap zindex">
+                <div class="row" *ngFor="let component of conditional.condition.components; let i = index;">  
+                    <app-write *ngIf="isWriter(component)" 
+                      [back]="true"
+                      [index]="i" 
+                      [hasToggle]="false"
+                      [writer]="component.value"
+                      [components]="conditional.condition.components"
+                      [variables]="variables"
+                      (remove)="removeComponent(conditional.condition.components, $event)">
+                    </app-write>
+  
+                    <app-operator *ngIf="isOperator(component)" 
+                      [back]="true"
+                      [index]="i" 
+                      [hasToggle]="false"
+                      [operator]="component.value"
+                      [components]="conditional.condition.components"
+                      [variables]="variables"
+                      (remove)="removeComponent(conditional.condition.components, $event)">
+                    </app-operator>
+  
+                    <app-conditional *ngIf="isConditional(component)"
+                      [back]="true"
+                      [index]="i" 
+                      [hasToggle]="false"
+                      [conditional]="component.value"
+                      [components]="conditional.condition.components"
+                      [variables]="variables"
+                      (remove)="removeComponent(conditional.condition.components, $event)">
+                    </app-conditional>
+                </div>
+            </div>
+
+            <div class="d-flex flex-wrap">
+                <div class="d-flex justify-content-center align-items-center">
+                    <span class="rigth" tabindex="0">{{'GENERAL.REPEAT' | translate }}</span>
+                    
+                    <app-command-button 
+                        [mode]="'inline'" 
+                        [title]="'Adicionar comandos na condição'" 
+                        [hasVariables]="false"
+                        [components]="conditional.nocondition.components"
+                        [variables]="variables"
+                        [text]="false" 
+                        [iconComands]="false"    
+                    ></app-command-button>
+                </div>
+            </div>
+
+            <div class="row d-flex flex-wrap zindex">
+                <div class="row" *ngFor="let component of conditional.nocondition.components; let i = index;">
+                    <app-write *ngIf="isWriter(component)" 
+                      [back]="true"
+                      [index]="i" 
+                      [hasToggle]="false"
+                      [writer]="component.value"
+                      [components]="conditional.nocondition.components"
+                      [variables]="variables"
+                      (remove)="removeComponent(conditional.nocondition.components, $event)">
+                    </app-write>
+  
+                    <app-operator *ngIf="isOperator(component)" 
+                      [back]="true"
+                      [index]="i" 
+                      [hasToggle]="false"
+                      [operator]="component.value"
+                      [components]="conditional.nocondition.components"
+                      [variables]="variables"
+                      (remove)="removeComponent(conditional.nocondition.components, $event)">
+                    </app-operator>
+  
+                    <app-conditional *ngIf="isConditional(component)"
+                      [back]="true"
+                      [index]="i" 
+                      [hasToggle]="false"
+                      [conditional]="component.value"
+                      [components]="conditional.nocondition.components"
+                      [variables]="variables"
+                      (remove)="removeComponent(conditional.nocondition.components, $event)">
+                    </app-conditional>
+                </div>
+            </div>
+        </div>
+
+        
+    </div>
+</div>
