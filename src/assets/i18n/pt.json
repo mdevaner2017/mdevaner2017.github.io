@@ -55,10 +55,11 @@
     "CONDITIONAL":"selecione a condição",
     "ELSE":"então",
     "ELSE_IF":"senao",
-    "REPEAT":"repita_para"
+    "REPEAT":"Repita_Para"
   },
   "COMANDS": {
     "TITLE": "Comandos",
+    "TITLE2":"Faça",
     "BUTTON": {
       "NEW_VARIABLE": "Nova Variável",
       "MATH": "Atribuição/Matemática",

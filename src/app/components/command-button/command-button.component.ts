@@ -9,6 +9,7 @@ import { TypesEnum } from 'src/app/enums/types.enum';
 export class CommandButtonComponent implements OnInit {
   @Input("mode") mode: any = "block";
   @Input("text") text: boolean = true;
+  @Input("text2") text2: boolean = false;
   @Input("hasVariables") hasVariables: boolean = true;
   @Input("iconComands") iconComands: boolean = true;
   @Input("title") title: any;

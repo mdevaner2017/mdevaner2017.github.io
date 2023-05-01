@@ -10,7 +10,7 @@
             <div class="row row-cols-2">
                 <div class="col">
                     <div class="d-flex justify-content-center align-items-center pl-3">
-                        <span class="blue"  id="for-select-{{index}}" tabindex="-1">repita_para</span>
+                        <span class="blue"  id="for-select-{{index}}" tabindex="-1">Repita_Para</span>
                         <select id="for-select-var-{{index}}" class="ml-2 col form-select" [(ngModel)]="for.variable" >
                             <option *ngIf="!variables.length" disabled [ngValue]="''">{{ "GENERAL.NOT_VARIABLE" | translate }}</option>
                             <option *ngIf="variables.length" disabled [ngValue]="''">{{ "GENERAL.SELECT_VARIABLE" | translate }}</option>
@@ -82,8 +82,8 @@
 
                 <div class="d-flex justify-content-center align-items-center col-1">
                     <app-command-button [mode]="'inline'" [title]="'Adicionar comandos à repetição'"
-                        [hasVariables]="false" [components]="for.components" [variables]="variables" [text]="false"
-                        [iconComands]="false"></app-command-button>
+                    [hasVariables]="false" [components]="for.components" [variables]="variables" [text2]="true"></app-command-button>
+
                 </div>
 
             </div>

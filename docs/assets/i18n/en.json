@@ -59,6 +59,7 @@
   },
   "COMANDS": {
     "TITLE": "Commands",
+    "TITLE2":"Do",
     "BUTTON": {
       "NEW_VARIABLE": "New Variable",
       "MATH": "Assignment/Math",

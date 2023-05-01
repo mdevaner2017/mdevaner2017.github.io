@@ -10,6 +10,7 @@ import { TypesEnum } from 'src/app/enums/types.enum';
 export class ForComponent implements OnInit {
   isHidden: boolean = true;
   @Input("text") text: boolean = true;
+  @Input("text2") text2: boolean = true;
   @Input("title") title: any;
   @Input("back") back: boolean = false;
   @Input("index") index: any;
