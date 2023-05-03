@@ -103,7 +103,7 @@ export class ForComponent implements OnInit {
 
   formatCommands() {
     const currentLang = this.translate.currentLang;
-    this.commandsPlainText = `<p class="mb-0">${currentLang == 'pt' ? 'repita_para' : 'repeat_for'} ${this.for.variable} ${currentLang == 'pt' ? 'de' : 'from'} ${this.for.variable} <span tabindex="-1">${currentLang == 'pt' ? 'ate' : 'to'}</span>  ${this.for.variable} ${currentLang == 'pt' ? 'passo' : 'pass'} ${this.for.incrementType}${this.for.incrementValue} {</p>`;
+    this.commandsPlainText = `<p class="mb-0">${currentLang == 'pt' ? 'repita_para' : 'repeat_for'} ${this.for.variable} ${currentLang == 'pt' ? 'de' : 'from'} ${this.for.startValue} <span tabindex="-1">${currentLang == 'pt' ? 'ate' : 'to'}</span>  ${this.for.finishValue} ${currentLang == 'pt' ? 'passo' : 'pass'} ${this.for.incrementType}${this.for.incrementValue} {</p>`;
     this.commandsPlainText += `<p>${this.runCommands(this.for.components)}</p>`;
     this.commandsPlainText += `<p>}</p>`;
   }
