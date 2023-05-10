@@ -1,5 +1,6 @@
 {
   "GENERAL": {
+    "IVPROG": "Accessible iVProg",
     "TITLE": "Start function",    
     "RECEIVE": "receive",
     "READ_CODE": "read code",
@@ -12,14 +13,14 @@
       "ENGLISH": "English"
     },
     "MENU": {
-      "START": "Go function start",
-      "ALT_I": "ALT + I Go to home function",
-      "TERMINAL": "go to terminal",
-      "ALT_T": "ALT + T Go to Terminal",
+      "START": "Go start function",
+      "ALT_I": "ALT + I Go to start function",
+      "TERMINAL": "Go to terminal",
+      "ALT_T": "ALT + T Go to terminal",
       "COMANDS": "Go to command list",
       "ALT_C": "ALT + C Go to command list",
-      "PROGRAM": "run program",
-      "ALT_E": "ALT+E Go Run Program"
+      "PROGRAM": "Run program",
+      "ALT_E": "ALT+E Run program"
     },
     "BUTTON": {
       "RUN": "Execute",
@@ -55,7 +56,9 @@
     "CONDITIONAL":"select the condition",
     "ELSE":"then",
     "ELSE_IF":"else",
-    "REPEAT":"repeat_to"
+    "REPEAT":"repeat_to",
+    "REPEAT_FROM":"from",
+    "REPEAT_TO":"to"
   },
   "COMANDS": {
     "TITLE": "Commands",

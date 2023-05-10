@@ -1,5 +1,6 @@
 {
   "GENERAL": {
+    "IVPROG": "iVProg Acessível",
     "TITLE": "Função início",
     "RECEIVE": "recebe",
     "READ_CODE": "Ler código",
@@ -15,11 +16,11 @@
       "START": "Ir função inicio",
       "ALT_I": "ALT + I Ir para função inicio",
       "TERMINAL": "Ir para o terminal",
-      "ALT_T": "ALT + T Ir para para o terminal",
+      "ALT_T": "ALT + T Ir para o terminal",
       "COMANDS": "Ir para a lista de comandos",
       "ALT_C": "ALT + C Ir para a lista de comandos",
       "PROGRAM": "Executar programa",
-      "ALT_E": "ALT + E Ir executar programa"
+      "ALT_E": "ALT + E Executar programa"
     },
     "BUTTON": {
       "RUN": "Executar",
@@ -55,7 +56,9 @@
     "CONDITIONAL":"selecione a condição",
     "ELSE":"então",
     "ELSE_IF":"senao",
-    "REPEAT":"Repita_Para"
+    "REPEAT":"Repita_Para",
+    "REPEAT_FROM":"De",
+    "REPEAT_TO":"Até"
   },
   "COMANDS": {
     "TITLE": "Comandos",
