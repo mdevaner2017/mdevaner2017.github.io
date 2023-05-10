@@ -58,7 +58,8 @@
     "ELSE_IF":"else",
     "REPEAT":"repeat_to",
     "REPEAT_FROM":"from",
-    "REPEAT_TO":"to"
+    "REPEAT_TO":"to",
+    "REPEAT_THEN":"then"
   },
   "COMANDS": {
     "TITLE": "Commands",

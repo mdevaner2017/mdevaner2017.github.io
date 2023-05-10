@@ -58,7 +58,8 @@
     "ELSE_IF":"senao",
     "REPEAT":"Repita_Para",
     "REPEAT_FROM":"De",
-    "REPEAT_TO":"Até"
+    "REPEAT_TO":"Até",
+    "REPEAT_THEN":"Faça"
   },
   "COMANDS": {
     "TITLE": "Comandos",
