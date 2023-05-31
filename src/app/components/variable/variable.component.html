@@ -57,7 +57,7 @@
     <div class="col-lg-3">
         <div class="d-flex justify-content-end">
             <app-command-button *ngIf="hasToggle" [mode]="'inline'" [text]="false" [title]="'Comandos'" [components]="components"
-            [variables]="variables"></app-command-button>
+            [variables]="variables" (change)="setStorage()"></app-command-button>
             <button class="btn btn-transparent" (click)="toggleHidden()">
                 <span *ngIf="isHidden" class="bi bi-unlock-fill" [title]="'GENERAL.READ_CODE' | translate"></span>
                 <span *ngIf="!isHidden" class="bi bi-lock-fill" [title]="'GENERAL.READ_EDIT' | translate"></span>

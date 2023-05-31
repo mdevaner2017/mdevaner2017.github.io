@@ -30,6 +30,12 @@ export class AppComponent {
     this.translate.addLangs(['pt', 'en']);
     this.translate.setDefaultLang(defaultLang);
     this.translate.use(defaultLang);
+
+    const storageComponents = sessionStorage.getItem("components");
+
+    if(storageComponents) {
+      this.components = JSON.parse(storageComponents);
+    }
   }
 
   changeLanguage(language: string) {
@@ -79,10 +85,15 @@ export class AppComponent {
 
   removeComponent(index: number) {
     this.components.splice(index, 1);
+    this.setStorage();
   }
 
   clear() {
     this.components = [];
+  }
+
+  setStorage() {
+    sessionStorage.setItem("components", JSON.stringify(this.components));
   }
 
   runCommands(components: any) {

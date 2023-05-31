@@ -20,6 +20,7 @@ export class WriteComponent implements OnInit {
   };
 
   @Output("remove") remove = new EventEmitter();
+  @Output("change") change = new EventEmitter();
 
   idElement: any;
 
@@ -37,6 +38,11 @@ export class WriteComponent implements OnInit {
 
   changeType() {
     this.writer.value = '';
+    this.change.emit();
+  }
+
+  setStorage() {
+    this.change.emit();
   }
 
   toggleHidden(){

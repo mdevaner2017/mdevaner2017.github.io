@@ -17,20 +17,20 @@
             <option [ngValue]="'TEXT'">{{ "GENERAL.TEXT" | translate }}</option>
         </select>
 
-        <select [(ngModel)]="writer.value" *ngIf="writer.type == 'VARIABLE'" class="ml-3 form-select">
+        <select [(ngModel)]="writer.value" (change)="setStorage()" *ngIf="writer.type == 'VARIABLE'" class="ml-3 form-select">
             <option *ngIf="variables.length && writer.value==''" disabled [ngValue]="''">{{ "WRITE.SELECT_OPERATION" | translate }}</option>
             <option *ngFor="let v of variables" [ngValue]="v.value.name">{{v.value.name}}</option>
             <option *ngIf="!variables.length && writer.value==''" disabled [ngValue]="''">{{ "GENERAL.NOT_VARIABLE" | translate }}</option>
         </select>
 
-        <input class="ml-3 form-select" [(ngModel)]="writer.value" *ngIf="writer.type == 'TEXT'" type="text"
+        <input class="ml-3 form-control" [(ngModel)]="writer.value" *ngIf="writer.type == 'TEXT'" type="text" (change)="setStorage()"
             [placeholder]=" 'GENERAL.DIGIT' | translate " />
     </div>
 
     <div class="col-lg-3">
         <div class="d-flex justify-content-end">
             <app-command-button *ngIf="hasToggle" [mode]="'inline'" [text]="false" [title]="'Comandos'" [components]="components"
-            [variables]="variables"></app-command-button>
+            [variables]="variables" (change)="setStorage()"></app-command-button>
             <button class="btn btn-transparent" (click)="toggleHidden()">
                 <span *ngIf="isHidden" class="bi bi-unlock-fill" [title]="'GENERAL.READ_CODE' | translate"></span>
                 <span *ngIf="!isHidden" class="bi bi-lock-fill" [title]="'GENERAL.READ_EDIT' | translate"></span>

@@ -27,15 +27,17 @@ export class ConditionalComponent implements OnInit {
     },
   };
 
-  conditionals: Array<any> = [];
   commandsPlainText: string = "";
 
   @Output("remove") remove = new EventEmitter();
+  @Output("change") change = new EventEmitter();
 
   constructor(public translate: TranslateService) { }
 
   ngOnInit(): void {
-    this.clear();
+    if (!this.conditional.conditionals) {
+      this.clear();
+    }
   }
 
   isVariable(component: any) {
@@ -56,6 +58,7 @@ export class ConditionalComponent implements OnInit {
 
   removeComponent(components: any, index: number) {
     components.splice(index, 1);
+    this.setStorage();
   }
 
   getComponentVariables(components: any) {
@@ -73,49 +76,52 @@ export class ConditionalComponent implements OnInit {
   }
 
   addConditional() {
-    this.conditionals.push({
-      index: this.conditionals.length,
+    this.conditional.conditionals.push({
+      index: this.conditional.conditionals.length,
       type: 'CONDITIONAL',
       value: '',
     });
 
-    this.focusConditional(this.conditionals.length - 1);
+    this.focusConditional(this.conditional.conditionals.length - 1);
 
-    this.conditionals.push({
-      index: this.conditionals.length,
+    this.conditional.conditionals.push({
+      index: this.conditional.conditionals.length,
       type: '',
       value: '',
     });
+
+    this.setStorage();
   }
 
-  changeInputValue(element : any) {
+  changeInputValue(element: any) {
     element.value = isNaN(element.valueString) ? `"${element.valueString}"` : element.valueString
     this.changeValue();
   }
 
   changeValue() {
     this.conditional.condition.value = "";
-    this.conditionals.forEach(op => {
+    this.conditional.conditionals.forEach((op: any) => {
       this.conditional.condition.value += `${op.value} `;
     });
+    this.setStorage();
   }
 
   changeConditional(element: any, condition: any, index: any) {
     element.value = condition;
     this.changeValue();
-    this.focusConditional(index+1);
+    this.focusConditional(index + 1);
   }
 
-  toggleHidden(){
+  toggleHidden() {
     this.isHidden = !this.isHidden;
 
-    if(!this.isHidden) {
+    if (!this.isHidden) {
       this.formatCommands();
       setTimeout(() => {
         document.getElementById("conditional-cod-" + this.index)?.focus();
       }, 200);
     }
-    else{
+    else {
       setTimeout(() => {
         document.getElementById("select-var-" + this.index)?.focus();
       }, 200);
@@ -137,19 +143,19 @@ export class ConditionalComponent implements OnInit {
 
     // Other components except variable types
     components.filter((c: any) => c.type != TypesEnum.VARIABLE).forEach((c: any) => {
-      if(c.type == TypesEnum.WRITER) {
-        if(c.value.type == TypesEnum.VARIABLE) {
+      if (c.type == TypesEnum.WRITER) {
+        if (c.value.type == TypesEnum.VARIABLE) {
           programComands += `&emsp; ${currentLang == 'pt' ? 'escreva' : 'write'}(${c.value.value}) <br/>`;
         } else {
           programComands += `&emsp; ${currentLang == 'pt' ? 'escreva' : 'write'}("${c.value.value}") <br/>`;
         }
       }
 
-      if(c.type == TypesEnum.OPERATOR) {
+      if (c.type == TypesEnum.OPERATOR) {
         programComands += `&emsp; ${c.value.reference} <- ${c.value.value} <br/>`;
       }
 
-      if(c.type == TypesEnum.CONDITIONAL) {
+      if (c.type == TypesEnum.CONDITIONAL) {
         programComands += `&emsp; ${currentLang == 'pt' ? 'se' : 'if'} ( ${c.value.condition.value} ) { <br/>`;
         programComands += `&emsp; ${this.runCommands(c.value.condition.components)}`;
         programComands += `&emsp; } ${currentLang == 'pt' ? 'senao' : 'else'} { <br/>`;
@@ -157,7 +163,7 @@ export class ConditionalComponent implements OnInit {
         programComands += `&emsp; } <br/>`;
       }
 
-      if(c.type == TypesEnum.FOR_CODITIONAL) {
+      if (c.type == TypesEnum.FOR_CODITIONAL) {
         programComands += `&emsp; ${currentLang == 'pt' ? 'repita_para' : 'repeat_for'} ${c.value.variable} ${currentLang == 'pt' ? 'de' : 'from'} ${c.value.startValue} ${currentLang == 'pt' ? 'ate' : 'to'} ${c.value.finishValue} ${currentLang == 'pt' ? 'passo' : 'pass'} ${c.value.incrementType}${c.value.incrementValue} { <br/>`;
         programComands += `&emsp; ${this.runCommands(c.value.components)}`;
         programComands += `&emsp; } <br/>`;
@@ -172,18 +178,24 @@ export class ConditionalComponent implements OnInit {
   }
 
   clear() {
-    this.conditionals = [];
+    this.conditional.conditionals = [];
 
-    this.conditionals.push({
-      index: this.conditionals.length,
+    this.conditional.conditionals.push({
+      index: this.conditional.conditionals.length,
       type: '',
       value: '',
     });
 
-    this.focusConditional(this.conditionals.length - 1);
+    this.focusConditional(this.conditional.conditionals.length - 1);
+    this.setStorage();
   }
 
   clearValue(conditional: any) {
     conditional.value = "";
+    this.setStorage();
+  }
+
+  setStorage() {
+    this.change.emit();
   }
 }

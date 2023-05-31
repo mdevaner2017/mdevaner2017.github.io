@@ -50,23 +50,23 @@
                 <div class="px-4 py-1">
                   <div *ngFor="let component of components; let i = index;">
                     <app-variable *ngIf="isVariable(component)" [index]="i" [variable]="component.value"
-                      [components]="components" [variables]="getVariables()" (remove)="removeComponent($event)">
+                      [components]="components" [variables]="getVariables()" (remove)="removeComponent($event)" (change)="setStorage()">
                     </app-variable>
 
                     <app-write *ngIf="isWriter(component)" [index]="i" [writer]="component.value"
-                      [components]="components" [variables]="getVariables()" (remove)="removeComponent($event)">
+                      [components]="components" [variables]="getVariables()" (remove)="removeComponent($event)" (change)="setStorage()">
                     </app-write>
 
                     <app-operator *ngIf="isOperator(component)" [index]="i" [operator]="component.value"
-                      [components]="components" [variables]="getVariables()" (remove)="removeComponent($event)">
+                      [components]="components" [variables]="getVariables()" (remove)="removeComponent($event)" (change)="setStorage()">
                     </app-operator>
 
                     <app-conditional *ngIf="isConditional(component)" [index]="i" [conditional]="component.value"
-                      [components]="components" [variables]="getVariables()" (remove)="removeComponent($event)">
+                      [components]="components" [variables]="getVariables()" (remove)="removeComponent($event)" (change)="setStorage()">
                     </app-conditional>
 
                     <app-for *ngIf="isFor(component)" [index]="i" [for]="component.value" [components]="components"
-                      [variables]="getVariables()" (remove)="removeComponent($event)">
+                      [variables]="getVariables()" (remove)="removeComponent($event)" (change)="setStorage()">
                     </app-for>
                   </div>
                 </div>
@@ -74,7 +74,7 @@
                 <div id="botoes" class="btn-group pt-4">
                   <div class="row">
                     <div class="col">
-                      <app-command-button [components]="components" [variables]="getVariables()"></app-command-button>
+                      <app-command-button [components]="components" [variables]="getVariables()" (change)="setStorage()"></app-command-button>
                     </div>
                   </div>
                   <button class="btn btn-success p-3" id="runCodeButton" type="button" (click)="run()">

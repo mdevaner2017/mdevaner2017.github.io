@@ -20,10 +20,9 @@ export class OperatorComponent implements OnInit {
   private pressedAlt: boolean = false;
 
   isHidden: boolean = true;
-  operators: Array<any> = [];
-  currentVariable: any;
 
   @Output("remove") remove = new EventEmitter();
+  @Output("change") change = new EventEmitter();
 
   constructor() { }
 
@@ -31,19 +30,21 @@ export class OperatorComponent implements OnInit {
   }
 
   changeVariable() {
-    this.operator.reference = this.currentVariable.name;
-    this.operators = [];
+    this.operator.reference = this.operator.currentVariable.name;
+    this.operator.operators = [];
+
+    this.setStorage();
   }
 
   addOperator(type: string, value: string = "") {
-    this.operators.push({
-      index: this.operators.length,
+    this.operator.operators.push({
+      index: this.operator.operators.length,
       type: type,
       value: value,
     });
     this.changeValue();
 
-    this.focusOperator(this.operators.length - 1);
+    this.focusOperator(this.operator.operators.length - 1);
   }
 
   focusOperator(indexOp: any) {
@@ -57,23 +58,25 @@ export class OperatorComponent implements OnInit {
   }
 
   clearOperator(index: any) {
-    this.operators.splice(index, 1);
+    this.operator.operators.splice(index, 1);
     this.changeValue();
   }
 
   clearValue(operator: any) {
     operator.value = "";
+    this.setStorage();
   }
 
   changeValue() {
     this.operator.value = "";
-    this.operators.forEach(op => {
+    this.operator.operators.forEach((op: any) => {
       this.operator.value += `${op.value} `;
     });
+    this.setStorage();
   }
 
   changeInputValue(operator: any) {
-    switch (this.currentVariable.type) {
+    switch (this.operator.currentVariable.type) {
       case "INTEGER":
         if (!/^[0-9]+$/.test(operator.value)) {
           operator.value = operator.value.substring(0, operator.value.length - 1);
@@ -96,10 +99,10 @@ export class OperatorComponent implements OnInit {
   }
 
   getVariables() {
-    if (this.currentVariable.type == "DOUBLE") {
+    if (this.operator.currentVariable.type == "DOUBLE") {
       return this.variables.filter((v: any) => v.value.type == 'DOUBLE' || v.value.type == 'INTEGER');
     } else {
-      return this.variables.filter((v: any) => v.value.type == this.currentVariable.type);
+      return this.variables.filter((v: any) => v.value.type == this.operator.currentVariable.type);
     }
   }
 
@@ -130,5 +133,13 @@ export class OperatorComponent implements OnInit {
         operatorElement.focus();
       }
     }, 200);
+  }
+
+  setStorage() {
+    this.change.emit();
+  }
+
+  compareFn(var1: any, var2: any) {
+    return var1 && var2 ? var1.name === var2.name : var1 === var2;
   }
 }

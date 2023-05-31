@@ -34,6 +34,7 @@ export class ForComponent implements OnInit {
   commandsPlainText: string = "";
 
   @Output("remove") remove = new EventEmitter();
+  @Output("change") change = new EventEmitter();
 
   constructor(public translate: TranslateService) { }
 
@@ -62,7 +63,9 @@ export class ForComponent implements OnInit {
 
   removeComponent(components: any, index: number) {
     components.splice(index, 1);
+    this.setStorage();
   }
+
   focusFor(index: any) {
     setTimeout(() => {
       let forElement = document.getElementById(`for-op-${this.index}`);
@@ -75,26 +78,28 @@ export class ForComponent implements OnInit {
 
   clearStartValue() {
     this.for.startValue = '';
+    this.setStorage();
   }
 
   clearFinishValue() {
     this.for.finishValue = '';
+    this.setStorage();
   }
-  
+
   removeFor() {
     this.remove.emit(this.index);
   }
 
-  toggleHidden(){
+  toggleHidden() {
     this.isHidden = !this.isHidden;
 
-    if(!this.isHidden) {
+    if (!this.isHidden) {
       this.formatCommands();
       setTimeout(() => {
         document.getElementById("for-cod-" + this.index)?.focus();
       }, 200);
     }
-    else{
+    else {
       setTimeout(() => {
         document.getElementById("for-select-" + this.index)?.focus();
       }, 200);
@@ -114,19 +119,19 @@ export class ForComponent implements OnInit {
 
     // Other components except variable types
     components.filter((c: any) => c.type != TypesEnum.VARIABLE).forEach((c: any) => {
-      if(c.type == TypesEnum.WRITER) {
-        if(c.value.type == TypesEnum.VARIABLE) {
+      if (c.type == TypesEnum.WRITER) {
+        if (c.value.type == TypesEnum.VARIABLE) {
           programComands += `&emsp; ${currentLang == 'pt' ? 'escreva' : 'write'}(${c.value.value}) <br/>`;
         } else {
           programComands += `&emsp; ${currentLang == 'pt' ? 'escreva' : 'write'}("${c.value.value}") <br/>`;
         }
       }
 
-      if(c.type == TypesEnum.OPERATOR) {
+      if (c.type == TypesEnum.OPERATOR) {
         programComands += `&emsp; ${c.value.reference} <- ${c.value.value} <br/>`;
       }
 
-      if(c.type == TypesEnum.CONDITIONAL) {
+      if (c.type == TypesEnum.CONDITIONAL) {
         programComands += `&emsp; ${currentLang == 'pt' ? 'se' : 'if'} ( ${c.value.condition.value} ) { <br/>`;
         programComands += `&emsp; ${this.runCommands(c.value.condition.components)}`;
         programComands += `&emsp; } ${currentLang == 'pt' ? 'senao' : 'else'} { <br/>`;
@@ -134,7 +139,7 @@ export class ForComponent implements OnInit {
         programComands += `&emsp; } <br/>`;
       }
 
-      if(c.type == TypesEnum.FOR_CODITIONAL) {
+      if (c.type == TypesEnum.FOR_CODITIONAL) {
         programComands += `&emsp; ${currentLang == 'pt' ? 'repita_para' : 'repeat_for'} ${c.value.variable} ${currentLang == 'pt' ? 'de' : 'from'} ${c.value.startValue} ${currentLang == 'pt' ? 'ate' : 'to'} ${c.value.finishValue} ${currentLang == 'pt' ? 'passo' : 'pass'} ${c.value.incrementType}${c.value.incrementValue} { <br/>`;
         programComands += `&emsp; ${this.runCommands(c.value.components)}`;
         programComands += `&emsp; } <br/>`;
@@ -142,5 +147,9 @@ export class ForComponent implements OnInit {
     });
 
     return programComands;
+  }
+
+  setStorage() {
+    this.change.emit();
   }
 }

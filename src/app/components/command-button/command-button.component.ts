@@ -20,6 +20,8 @@ export class CommandButtonComponent implements OnInit {
   @Input("conditionals") conditionals: any[] = [];
   @Input("for") for: any[] = [];
 
+  @Output("change") change = new EventEmitter();
+
   constructor() { }
 
   ngOnInit(): void {
@@ -39,6 +41,8 @@ export class CommandButtonComponent implements OnInit {
 
     this.components.push(component);
 
+    this.setStorage();
+
     setTimeout(() => {
       document.getElementById("variable-type-" + (this.components.length - 1))?.focus();
     }, 100);
@@ -57,6 +61,8 @@ export class CommandButtonComponent implements OnInit {
 
     this.components.push(component);
 
+    this.setStorage();
+
     setTimeout(() => {
       document.getElementById("write-type-" + (this.components.length - 1))?.focus();
     }, 100);
@@ -74,6 +80,8 @@ export class CommandButtonComponent implements OnInit {
     }
 
     this.components.push(component);
+
+    this.setStorage();
 
     setTimeout(() => {
       document.getElementById("select-var-" + (this.components.length - 1))?.focus();
@@ -97,6 +105,8 @@ export class CommandButtonComponent implements OnInit {
     }
 
     this.components.push(component);
+
+    this.setStorage();
 
     setTimeout(() => {
       document.getElementById("button-op-" + (this.components.length - 1))?.focus();
@@ -123,8 +133,14 @@ export class CommandButtonComponent implements OnInit {
 
     this.components.push(component);
 
+    this.setStorage();
+
     setTimeout(() => {
       document.getElementById("for-select-" + (this.components.length - 1))?.focus();
     }, 100);
+  }
+
+  setStorage() {
+    this.change.emit();
   }
 }

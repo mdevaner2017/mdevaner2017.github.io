@@ -15,6 +15,7 @@ export class VariableComponent implements OnInit {
   @Input("components") components: any[] = [];
   @Input("variables") variables: any[] = [];
   @Output("remove") remove = new EventEmitter();
+  @Output("change") change = new EventEmitter();
 
   @ViewChild('ngSelect') ngSelect!: NgSelectComponent;
 
@@ -52,6 +53,8 @@ export class VariableComponent implements OnInit {
       this.variable.value = "verdadeiro";
     }
 
+    this.setStorage();
+
     // this.focusElement(`variable-name-${this.index}`)
   }
   
@@ -68,6 +71,10 @@ export class VariableComponent implements OnInit {
         document.getElementById("variable-type-" + this.index)?.focus();
       }, 200);
     }
+  }
+
+  setStorage() {
+    this.change.emit();
   }
 
   @HostListener("document:keyup", ["$event"]) onKeyUp(event: KeyboardEvent) {

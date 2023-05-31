@@ -11,7 +11,7 @@
                 <div class="col">
                     <div class="d-flex justify-content-center align-items-center pl-3">
                         <span class="blue"  id="for-select-{{index}}" tabindex="-1">{{ "GENERAL.REPEAT" | translate }}</span>
-                        <select id="for-select-var-{{index}}" class="ml-2 col form-select" [(ngModel)]="for.variable" >
+                        <select id="for-select-var-{{index}}" class="ml-2 col form-select" [(ngModel)]="for.variable" (change)="setStorage()" >
                             <option *ngIf="!variables.length" disabled [ngValue]="''">{{ "GENERAL.NOT_VARIABLE" | translate }}</option>
                             <option *ngIf="variables.length" disabled [ngValue]="''">{{ "GENERAL.SELECT_VARIABLE" | translate }}</option>
                             <option *ngFor="let v of variables" [ngValue]="v.value.name">{{v.value.name}}</option>
@@ -28,13 +28,13 @@
                             <option [ngValue]="'VALUE'">{{ "GENERAL.VALUE" | translate }}</option>
                         </select>
 
-                        <select id="for-start-value-{{index}}" class="ml-1 form-select" *ngIf="for.startType == 'VARIABLE'" [(ngModel)]="for.startValue">
+                        <select id="for-start-value-{{index}}" class="ml-1 form-select" *ngIf="for.startType == 'VARIABLE'" [(ngModel)]="for.startValue" (change)="setStorage()">
                             <option *ngIf="!variables.length" disabled [ngValue]="''">{{ "GENERAL.NOT_VARIABLE" | translate }}</option>
                             <option *ngIf="variables.length" disabled [ngValue]="''">{{ "GENERAL.SELECT_VARIABLE" | translate }}</option>
                             <option *ngFor="let v of variables" [ngValue]="v.value.name">{{v.value.name}}</option>
                         </select>
 
-                        <input id="for-start-value-{{index}}" class="ml-1 form-control" *ngIf="for.startType == 'VALUE'" [(ngModel)]="for.startValue" type="text" [placeholder]="'GENERAL.DIGIT_VALUE' | translate" />
+                        <input id="for-start-value-{{index}}" class="ml-1 form-control" *ngIf="for.startType == 'VALUE'" [(ngModel)]="for.startValue" (change)="setStorage()" type="text" [placeholder]="'GENERAL.DIGIT_VALUE' | translate" />
                     </div>
                 </div>
             </div>
@@ -49,24 +49,24 @@
                             <option [ngValue]="'VALUE'">{{ "GENERAL.VALUE" | translate }}</option>
                         </select>
 
-                        <select id="for-finish-value-{{index}}" class="ml-1 form-select" *ngIf="for.finishType == 'VARIABLE'" [(ngModel)]="for.finishValue">
+                        <select id="for-finish-value-{{index}}" class="ml-1 form-select" *ngIf="for.finishType == 'VARIABLE'" [(ngModel)]="for.finishValue" (change)="setStorage()">
                             <option *ngIf="!variables.length" disabled [ngValue]="''">{{ "GENERAL.NOT_VARIABLE" | translate }}</option>
                             <option *ngIf="variables.length" disabled [ngValue]="''">{{ "GENERAL.SELECT_VARIABLE" | translate }}</option>
                             <option *ngFor="let v of variables" [ngValue]="v.value.name">{{v.value.name}}</option>
                         </select>
 
-                        <input id="for-finish-value-{{index}}" class="ml-1 form-control" *ngIf="for.finishType == 'VALUE'" [(ngModel)]="for.finishValue" type="text" [placeholder]="'GENERAL.DIGIT_VALUE' | translate" />
+                        <input id="for-finish-value-{{index}}" class="ml-1 form-control" *ngIf="for.finishType == 'VALUE'" [(ngModel)]="for.finishValue" (change)="setStorage()" type="text" [placeholder]="'GENERAL.DIGIT_VALUE' | translate" />
                     </div>
                 </div>
 
                 <div class="col-4 p-0">
                     <div class="d-flex justify-content-center align-items-center pt-3 pb-3">
-                        <select id="for-increment-type-{{index}}" class="ml-1 form-select" [(ngModel)]="for.incrementType">
+                        <select id="for-increment-type-{{index}}" class="ml-1 form-select" [(ngModel)]="for.incrementType" (change)="setStorage()">
                             <option [ngValue]="''" disabled>{{ "GENERAL.SELECT" | translate }}</option>
                             <option [ngValue]="'+'" title="incremento">++</option>
                             <option [ngValue]="'-'" title="decremento">&minus;&minus;</option>
                         </select>
-                        <input id="for-increment-value-{{index}}" class="ml-1 form-control" [(ngModel)]="for.incrementValue" type="text" [placeholder]="'GENERAL.DIGIT_VALUE' | translate" />
+                        <input id="for-increment-value-{{index}}" class="ml-1 form-control" [(ngModel)]="for.incrementValue" (change)="setStorage()" type="text" [placeholder]="'GENERAL.DIGIT_VALUE' | translate" />
                     </div>
                 </div>
 
@@ -77,7 +77,8 @@
                         [hasVariables]="false" 
                         [components]="for.components" 
                         [variables]="variables" 
-                        [text2]="true">
+                        [text2]="true"
+                        (change)="setStorage()">
                     </app-command-button>
                 </div>
             </div>
@@ -86,22 +87,22 @@
                 <div class="row" *ngFor="let component of for.components; let i = index;">
                     <app-write *ngIf="isWriter(component)" [back]="true" [index]="i" [hasToggle]="false"
                         [writer]="component.value" [components]="for.components" [variables]="variables"
-                        (remove)="removeComponent(for.components, $event)">
+                        (remove)="removeComponent(for.components, $event)" (change)="setStorage()">
                     </app-write>
 
                     <app-operator *ngIf="isOperator(component)" [back]="true" [index]="i" [hasToggle]="false"
                         [operator]="component.value" [components]="for.components" [variables]="variables"
-                        (remove)="removeComponent(for.components, $event)">
+                        (remove)="removeComponent(for.components, $event)" (change)="setStorage()">
                     </app-operator>
 
                     <app-conditional *ngIf="isConditional(component)" [back]="true" [index]="i" [hasToggle]="false"
                         [conditional]="component.value" [components]="for.components" [variables]="variables"
-                        (remove)="removeComponent(for.components, $event)">
+                        (remove)="removeComponent(for.components, $event)" (change)="setStorage()">
                     </app-conditional>
 
                     <app-for *ngIf="isFor(component)" [back]="true" [index]="i" [hasToggle]="false"
                         [for]="component.value" [components]="for.components" [variables]="variables"
-                        (remove)="removeComponent(for.components, $event)">
+                        (remove)="removeComponent(for.components, $event)" (change)="setStorage()">
                     </app-for>
                 </div>
             </div>
@@ -114,7 +115,8 @@
                 [text]="false" 
                 [title]="'Comandos'"
                 [components]="components" 
-                [variables]="variables">
+                [variables]="variables"
+                (change)="setStorage()">
             </app-command-button>
 
             <button class="btn btn-transparent"  (click)="toggleHidden()">

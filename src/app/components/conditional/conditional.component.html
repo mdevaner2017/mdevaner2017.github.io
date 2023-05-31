@@ -14,7 +14,7 @@
                     <span tabindex="0" aria-hidden="false" class="sr-only">{{'GENERAL.OPEN_PARENTHESES' | translate }}</span>
                 </div>
 
-                <div class="d-flex align-items-center" *ngFor="let op of conditionals">
+                <div class="d-flex align-items-center" *ngFor="let op of conditional.conditionals">
                     <div class="col">
                         <select class="form-select" id="conditional-op-{{index}}-{{op.index}}" *ngIf="op.type != 'CONDITIONAL'"
                             [(ngModel)]="op.type" (change)="clearValue(op)">
@@ -117,7 +117,7 @@
                 </div>
 
                 <div class="d-flex justify-content-center align-items-center">
-                    <button class="btn btn-primary more mr-2" *ngIf="conditionals.length" type="button" (click)="addConditional()">
+                    <button class="btn btn-primary more mr-2" *ngIf="conditional.conditionals.length" type="button" (click)="addConditional()">
                         <strong aria-hidden="true">+</strong>
                         <strong aria-hidden="false" class="sr-only">{{'GENERAL.CONDITIONAL' | translate }}</strong>
                     </button>
@@ -138,6 +138,7 @@
                         [variables]="variables"
                         [text]="false" 
                         [iconComands]="false"    
+                        (change)="setStorage()"
                     ></app-command-button>
                 </div>
 
@@ -154,6 +155,7 @@
                 [title]="'Comandos'" 
                 [components]="components"
                 [variables]="variables"
+                (change)="setStorage()"
             ></app-command-button>
             <button class="btn btn-transparent" (click)="toggleHidden()">
                 <span *ngIf="isHidden" class="bi bi-unlock-fill"  [title]="'GENERAL.READ_CODE' | translate"><span class="sr-only">{{ "GENERAL.READ_CODE" | translate }}</span></span>
@@ -173,7 +175,8 @@
                       [writer]="component.value"
                       [components]="conditional.condition.components"
                       [variables]="variables"
-                      (remove)="removeComponent(conditional.condition.components, $event)">
+                      (remove)="removeComponent(conditional.condition.components, $event)"
+                      (change)="setStorage()">
                     </app-write>
   
                     <app-operator *ngIf="isOperator(component)" 
@@ -183,7 +186,8 @@
                       [operator]="component.value"
                       [components]="conditional.condition.components"
                       [variables]="variables"
-                      (remove)="removeComponent(conditional.condition.components, $event)">
+                      (remove)="removeComponent(conditional.condition.components, $event)"
+                      (change)="setStorage()">
                     </app-operator>
   
                     <app-conditional *ngIf="isConditional(component)"
@@ -193,7 +197,8 @@
                       [conditional]="component.value"
                       [components]="conditional.condition.components"
                       [variables]="variables"
-                      (remove)="removeComponent(conditional.condition.components, $event)">
+                      (remove)="removeComponent(conditional.condition.components, $event)"
+                      (change)="setStorage()">
                     </app-conditional>
                 </div>
             </div>
@@ -209,7 +214,8 @@
                         [components]="conditional.nocondition.components"
                         [variables]="variables"
                         [text]="false" 
-                        [iconComands]="false"    
+                        [iconComands]="false"   
+                        (change)="setStorage()" 
                     ></app-command-button>
                 </div>
             </div>
@@ -223,7 +229,8 @@
                       [writer]="component.value"
                       [components]="conditional.nocondition.components"
                       [variables]="variables"
-                      (remove)="removeComponent(conditional.nocondition.components, $event)">
+                      (remove)="removeComponent(conditional.nocondition.components, $event)"
+                      (change)="setStorage()">
                     </app-write>
   
                     <app-operator *ngIf="isOperator(component)" 
@@ -233,7 +240,8 @@
                       [operator]="component.value"
                       [components]="conditional.nocondition.components"
                       [variables]="variables"
-                      (remove)="removeComponent(conditional.nocondition.components, $event)">
+                      (remove)="removeComponent(conditional.nocondition.components, $event)"
+                      (change)="setStorage()">
                     </app-operator>
   
                     <app-conditional *ngIf="isConditional(component)"
@@ -243,7 +251,8 @@
                       [conditional]="component.value"
                       [components]="conditional.nocondition.components"
                       [variables]="variables"
-                      (remove)="removeComponent(conditional.nocondition.components, $event)">
+                      (remove)="removeComponent(conditional.nocondition.components, $event)"
+                      (change)="setStorage()">
                     </app-conditional>
                 </div>
             </div>
