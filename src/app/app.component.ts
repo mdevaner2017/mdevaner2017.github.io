@@ -1,5 +1,7 @@
-import { Component, ElementRef, HostListener, QueryList, ViewChildren } from '@angular/core';
+import { Component, ElementRef, HostListener, QueryList, ViewChildren, inject } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { LogService } from './features/logs/services/log.service';
+import { Log } from './features/logs/models/log.model';
 import { TypesEnum } from './enums/types.enum';
 declare var vcat: any;
 
@@ -13,27 +15,29 @@ export class AppComponent {
   private pressedAlt: boolean = false;
   components: Array<any> = [];
   isRunning: boolean = false;
+  isMonitoring: boolean = false;
+  private currentLogId?: number;
 
   @ViewChildren('input') inputs!: QueryList<ElementRef>;
 
-  constructor(public translate: TranslateService) {
-    
+  constructor(public translate: TranslateService, private logService: LogService) {
+
   }
 
   ngOnInit(): void {
     let defaultLang: any = sessionStorage.getItem("defaultLang");
 
-    if(!defaultLang || defaultLang == null || defaultLang == "") {
+    if (!defaultLang || defaultLang == null || defaultLang == "") {
       defaultLang = "pt"
     }
-    
+
     this.translate.addLangs(['pt', 'en']);
     this.translate.setDefaultLang(defaultLang);
     this.translate.use(defaultLang);
 
     const storageComponents = sessionStorage.getItem("components");
 
-    if(storageComponents) {
+    if (storageComponents) {
       this.components = JSON.parse(storageComponents);
     }
   }
@@ -97,6 +101,7 @@ export class AppComponent {
   }
 
   runCommands(components: any) {
+    // TODO: Vamos executar isso toda vez que o usuário editar o programa e guardar em algum canto
     const currentLang = "pt";
     let programComands = "";
 
@@ -122,19 +127,19 @@ export class AppComponent {
 
     // Other components except variable types
     components.filter((c: any) => c.type != TypesEnum.VARIABLE).forEach((c: any) => {
-      if(c.type == TypesEnum.WRITER) {
-        if(c.value.type == TypesEnum.VARIABLE) {
+      if (c.type == TypesEnum.WRITER) {
+        if (c.value.type == TypesEnum.VARIABLE) {
           programComands += `${currentLang == 'pt' ? 'escreva' : 'write'}(${c.value.value}) \n`;
         } else {
           programComands += `${currentLang == 'pt' ? 'escreva' : 'write'}("${c.value.value}") \n`;
         }
       }
 
-      if(c.type == TypesEnum.OPERATOR) {
+      if (c.type == TypesEnum.OPERATOR) {
         programComands += `${c.value.reference} <- ${c.value.value} \n`;
       }
 
-      if(c.type == TypesEnum.CONDITIONAL) {
+      if (c.type == TypesEnum.CONDITIONAL) {
         programComands += `${currentLang == 'pt' ? 'se' : 'id'} ( ${c.value.condition.value} ) { \n`;
         programComands += this.runCommands(c.value.condition.components);
         programComands += `} ${currentLang == 'pt' ? 'senao' : 'else'} { \n`;
@@ -142,7 +147,7 @@ export class AppComponent {
         programComands += `} \n`;
       }
 
-      if(c.type == TypesEnum.FOR_CODITIONAL) {
+      if (c.type == TypesEnum.FOR_CODITIONAL) {
         programComands += `${currentLang == 'pt' ? 'repita_para' : 'repeat_for'} ${c.value.variable} ${currentLang == 'pt' ? 'de' : 'from'} ${c.value.startValue} ${currentLang == 'pt' ? 'ate' : 'to'} ${c.value.finishValue} ${currentLang == 'pt' ? 'passo' : 'pass'} ${c.value.incrementType}${c.value.incrementValue} { \n`;
         programComands += this.runCommands(c.value.components);
         programComands += `} \n`;
@@ -208,6 +213,7 @@ export class AppComponent {
       const proc = new vcat.IVProgProcessor(ast);
       // Registrando um objeto que fornece o minimo necessário para o processador
       // Vê: src/io/ouput.js
+      // TODO: Guardar o resultado do output nos logs
       proc.registerOutput({
         sendOutput: this.terminalOutput,
       });
@@ -230,6 +236,7 @@ export class AppComponent {
       else
         console.error(error)
 
+      // TODO: Guardar o resultado do output nos logs
       this.terminalOutput(error.message);
       // a linha e coluna foi a estrategia pensada para poder associar o erro com o elemento visual que o gerou
       // uma vez que seria possivel associar seções do texto com o elemento que o gerou
@@ -242,7 +249,7 @@ export class AppComponent {
       let textTerminal = document.getElementById("textTerminal");
 
       if (terminalElement && textTerminal) {
-        let terminalContent =  terminalElement.innerHTML;
+        let terminalContent = terminalElement.innerHTML;
         terminalContent += `<p>${valor}</p>`;
         terminalElement.innerHTML = terminalContent;
         textTerminal.focus();
@@ -258,6 +265,26 @@ export class AppComponent {
         terminalElement.innerHTML = "";
       }
     }, 200);
+  }
+
+  async startMonitoring() {
+    this.isMonitoring = !this.isMonitoring;
+
+    if (this.isMonitoring) {
+      console.log("Iniciando monitoramento");
+      const id = await this.logService.adicionarLog({
+        dataHoraInicio: new Date(),
+        dataHoraFim: null,
+        execucoes: []
+      });
+      this.currentLogId = id;
+    } else if (!this.isMonitoring && this.currentLogId) {
+      console.log("Finalizando monitoramento: ", this.currentLogId);
+      await this.logService.atualizarLog(this.currentLogId, {
+        dataHoraFim: new Date()
+      });
+      this.currentLogId = undefined;
+    }
   }
 
   goToComands() {

@@ -1,11 +1,11 @@
 {
   "GENERAL": {
     "IVPROG": "Accessible iVProg",
-    "TITLE": "Start function",    
+    "TITLE": "Start function",
     "RECEIVE": "receive",
     "READ_CODE": "Read code",
     "READ_EDIT": "Edit code",
-    "READ_DELETE":"Delete Variable",
+    "READ_DELETE": "Delete Variable",
     "TRUE": "true",
     "FALSE": "false",
     "LANGUAGES": {
@@ -20,7 +20,11 @@
       "COMANDS": "Go to command list",
       "ALT_C": "ALT + C Go to command list",
       "PROGRAM": "Run program",
-      "ALT_E": "ALT+E Run program"
+      "ALT_E": "ALT+E Run program",
+      "MONITOR": "Monitor Performance",
+      "MONITOR_OFF": "Stop Monitoring and Download Log",
+      "ALT_M": "ALT + M Monitor Performance",
+      "ALT_M_OFF": "ALT + M Stop Monitoring and Download Log"
     },
     "BUTTON": {
       "RUN": "Execute",
@@ -33,37 +37,37 @@
     "NOT_VARIABLE": "No variables created yet!",
     "DIGIT": "Enter the text to be printed",
     "REMOVE_COMANDS": "Remove commands",
-    "SELECT_VARIABLE":"Select the variable",
+    "SELECT_VARIABLE": "Select the variable",
     "SELECT_PAR": "Select the parenthesis",
-    "OPEN_PARENTHESES":"open parentheses",
-    "CLOSE_PARENTHESES":"close parentheses",
-    "VALUE":"Value",
-    "SELECT_VALUE":"Select value",
-    "DIGIT_VALUE":"Value",
-    "SELECT_OPERATOR":"Select the operation",
-    "ADD":"To add",
-    "OPERATOR_MATH":"Mathematical Operators",
+    "OPEN_PARENTHESES": "open parentheses",
+    "CLOSE_PARENTHESES": "close parentheses",
+    "VALUE": "Value",
+    "SELECT_VALUE": "Select value",
+    "DIGIT_VALUE": "Value",
+    "SELECT_OPERATOR": "Select the operation",
+    "ADD": "To add",
+    "OPERATOR_MATH": "Mathematical Operators",
     "CLEAN": "To clean",
-    "IF":"if",
-    "MATH":"Arithmetic",
-    "LOGIC":"Logical",
-    "MULTPLICATION":"Multiplication",
-    "AND":"and",
+    "IF": "if",
+    "MATH": "Arithmetic",
+    "LOGIC": "Logical",
+    "MULTPLICATION": "Multiplication",
+    "AND": "and",
     "OR": "or",
-    "NO":"no",
-    "RELATIONAL":"Relational",
-    "EXCLAMATION":"Exclamation, same operator not equal to",
-    "CONDITIONAL":"select the condition",
-    "ELSE":"then",
-    "ELSE_IF":"else",
-    "REPEAT":"repeat_to",
-    "REPEAT_FROM":"from",
-    "REPEAT_TO":"to",
-    "REPEAT_THEN":"then"
+    "NO": "no",
+    "RELATIONAL": "Relational",
+    "EXCLAMATION": "Exclamation, same operator not equal to",
+    "CONDITIONAL": "select the condition",
+    "ELSE": "then",
+    "ELSE_IF": "else",
+    "REPEAT": "repeat_to",
+    "REPEAT_FROM": "from",
+    "REPEAT_TO": "to",
+    "REPEAT_THEN": "then"
   },
   "COMANDS": {
     "TITLE": "Commands",
-    "TITLE2":"Do",
+    "TITLE2": "Do",
     "BUTTON": {
       "NEW_VARIABLE": "New Variable",
       "MATH": "Assignment/Math",
@@ -79,10 +83,10 @@
     "LOGIC": "logical",
     "TYPE": "Variable Type"
   },
-  "WRITE":{
+  "WRITE": {
     "SELECT_OPERATION": "Select the variable to assign the operation"
   },
-  "TERMINAL":{
+  "TERMINAL": {
     "START": "Start of execution...",
     "FINISH": "End of execution..."
   }

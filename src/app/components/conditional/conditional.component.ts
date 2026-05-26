@@ -196,6 +196,7 @@ export class ConditionalComponent implements OnInit {
   }
 
   setStorage() {
+    // TODO: executa toda vez que adiciona este comando
     this.change.emit();
   }
 }

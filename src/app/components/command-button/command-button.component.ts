@@ -88,7 +88,7 @@ export class CommandButtonComponent implements OnInit {
     }, 100);
   }
 
-  addConditional(){
+  addConditional() {
     const conditional = {
       condition: {
         value: '',
@@ -114,7 +114,7 @@ export class CommandButtonComponent implements OnInit {
   }
 
 
-  addFor(){
+  addFor() {
     const forOperator = {
       variable: '',
       startType: '',
@@ -141,6 +141,7 @@ export class CommandButtonComponent implements OnInit {
   }
 
   setStorage() {
+    // TODO: executa toda vez que adiciona um comando
     this.change.emit();
   }
 }

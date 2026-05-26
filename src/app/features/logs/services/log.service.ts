@@ -1,0 +1,30 @@
+import { Injectable } from '@angular/core';
+import { db } from '../../../core/database/app-database';
+import { liveQuery } from 'dexie';
+import { from } from 'rxjs';
+import type { Log } from '../models/log.model';
+
+@Injectable({
+    providedIn: 'root'
+})
+export class LogService {
+
+    // Retorna um Observable do RxJS, ótimo para o Angular
+    async obterLogs(): Promise<Log[]> {
+        // liveQuery atualiza os dados automaticamente se houver mudanças no IndexedDB
+        return await db.logs.toArray();
+    }
+
+    async adicionarLog(log: Log): Promise<number> {
+        const id = await db.logs.add(log);
+        return id;
+    }
+
+    async atualizarLog(id: number, mudancas: Partial<Log>): Promise<number> {
+        return await db.logs.update(id, mudancas);
+    }
+
+    async deletarLog(id: number): Promise<void> {
+        await db.logs.delete(id);
+    }
+}
