@@ -1,6 +1,7 @@
 import { Component, ElementRef, HostListener, QueryList, ViewChildren, inject } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { LogService } from './features/logs/services/log.service';
+import { LogExportService } from './features/logs/services/log-export.service';
 import { Log } from './features/logs/models/log.model';
 import { TypesEnum } from './enums/types.enum';
 import { Execucao } from './features/logs/models/execucao.model';
@@ -21,7 +22,7 @@ export class AppComponent {
 
   @ViewChildren('input') inputs!: QueryList<ElementRef>;
 
-  constructor(public translate: TranslateService, private logService: LogService) {
+  constructor(public translate: TranslateService, private logService: LogService, private logExportService: LogExportService) {
 
   }
 
@@ -290,7 +291,6 @@ export class AppComponent {
     }
   }
 
-
   async startMonitoring() {
     this.isMonitoring = !this.isMonitoring;
 
@@ -307,6 +307,10 @@ export class AppComponent {
       await this.logService.atualizarLog(this.currentLogId, {
         dataHoraFim: new Date()
       });
+
+      const log = await this.logService.exportLog(this.currentLogId);
+      this.logExportService.exportLogTxt(log);
+
       this.currentLogId = undefined;
     }
   }

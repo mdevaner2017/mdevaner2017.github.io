@@ -37,4 +37,8 @@ export class LogService {
     async deletarLog(id: number): Promise<void> {
         await db.logs.delete(id);
     }
+
+    async exportLog(id: number): Promise<Log | undefined> {
+        return await db.logs.get(id);
+    }
 }
