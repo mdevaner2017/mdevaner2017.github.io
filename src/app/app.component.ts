@@ -3,6 +3,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { LogService } from './features/logs/services/log.service';
 import { Log } from './features/logs/models/log.model';
 import { TypesEnum } from './enums/types.enum';
+import { Execucao } from './features/logs/models/execucao.model';
 declare var vcat: any;
 
 @Component({
@@ -206,6 +207,12 @@ export class AppComponent {
 
     this.isRunning = true;
 
+    let executionOutput = "";
+    const captureOutput = (valor: any) => {
+      executionOutput += valor + "\n";
+      this.terminalOutput(valor);
+    };
+
     try {
       this.clearTerminal();
       vcat.LocalizedStrings.service.setLang("pt");
@@ -213,15 +220,18 @@ export class AppComponent {
       const proc = new vcat.IVProgProcessor(ast);
       // Registrando um objeto que fornece o minimo necessário para o processador
       // Vê: src/io/ouput.js
-      // TODO: Guardar o resultado do output nos logs
       proc.registerOutput({
-        sendOutput: this.terminalOutput,
+        sendOutput: captureOutput,
       });
       // IVProgProcessor.interpretAST é uma função assíncrona
       // Ela devolve o estado final do programa (valores finais das variáveis declaradas dentro da função "inicio" ou no escopo global)
       // A classe Store em src/processor/store/store.ts descreve o parametro mas no contexto atual ele é totalmente irrelevante
       proc.interpretAST().then((_finalProgramState: any) => {
-        console.log("Programa executado com sucesso!")
+        console.log("Programa executado com sucesso!");
+        this.registrarExecucaoLog(programSintax, executionOutput);
+      }).catch((err: any) => {
+        executionOutput += "Erro de execução: " + err + "\n";
+        this.registrarExecucaoLog(programSintax, executionOutput);
       });
     } catch (error: any) {
       // Caso haja erro de sintaxe ou semântico, antes ou durante a interpretação do código uma exceção será lançada
@@ -236,8 +246,9 @@ export class AppComponent {
       else
         console.error(error)
 
-      // TODO: Guardar o resultado do output nos logs
+      executionOutput += error.message + "\n";
       this.terminalOutput(error.message);
+      this.registrarExecucaoLog(programSintax, executionOutput);
       // a linha e coluna foi a estrategia pensada para poder associar o erro com o elemento visual que o gerou
       // uma vez que seria possivel associar seções do texto com o elemento que o gerou
     }
@@ -266,6 +277,19 @@ export class AppComponent {
       }
     }, 200);
   }
+
+  registrarExecucaoLog(codigo: string, saida: string) {
+    if (this.isMonitoring && this.currentLogId) {
+      const execucao: Execucao = {
+        id: crypto.randomUUID(),
+        timestamp: new Date(),
+        codigo: codigo,
+        saida: saida
+      };
+      this.logService.adicionarExecucao(this.currentLogId, execucao);
+    }
+  }
+
 
   async startMonitoring() {
     this.isMonitoring = !this.isMonitoring;
