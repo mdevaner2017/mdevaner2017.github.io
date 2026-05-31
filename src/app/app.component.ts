@@ -42,6 +42,8 @@ export class AppComponent {
     if (storageComponents) {
       this.components = JSON.parse(storageComponents);
     }
+
+    this.getMonitoringInStorage();
   }
 
   changeLanguage(language: string) {
@@ -100,6 +102,24 @@ export class AppComponent {
 
   setStorage() {
     sessionStorage.setItem("components", JSON.stringify(this.components));
+  }
+
+  setMonitoringInStorage() {
+    sessionStorage.setItem("isMonitoring", this.isMonitoring.toString());
+    sessionStorage.setItem("currentLogId", this.currentLogId?.toString() || "");
+  }
+
+  deleteMonitoring() {
+    sessionStorage.removeItem("isMonitoring");
+    sessionStorage.removeItem("currentLogId");
+  }
+
+  getMonitoringInStorage() {
+    const isMonitoringSession = sessionStorage.getItem("isMonitoring") === "true";
+    if (isMonitoringSession) {
+      this.isMonitoring = true;
+      this.currentLogId = parseInt(sessionStorage.getItem("currentLogId") || "0");
+    }
   }
 
   runCommands(components: any) {
@@ -302,6 +322,7 @@ export class AppComponent {
         execucoes: []
       });
       this.currentLogId = id;
+      this.setMonitoringInStorage();
     } else if (!this.isMonitoring && this.currentLogId) {
       console.log("Finalizando monitoramento: ", this.currentLogId);
       await this.logService.atualizarLog(this.currentLogId, {
@@ -312,6 +333,7 @@ export class AppComponent {
       this.logExportService.exportLogTxt(log);
 
       this.currentLogId = undefined;
+      this.deleteMonitoring();
     }
   }
 
