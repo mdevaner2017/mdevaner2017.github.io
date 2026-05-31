@@ -19,6 +19,7 @@ export class AppComponent {
   isRunning: boolean = false;
   isMonitoring: boolean = false;
   private currentLogId?: number;
+  showConsentModal: boolean = false;
 
   @ViewChildren('input') inputs!: QueryList<ElementRef>;
 
@@ -313,9 +314,14 @@ export class AppComponent {
   }
 
   async startMonitoring() {
-    this.isMonitoring = !this.isMonitoring;
+    if (!this.isMonitoring) {
+      const hasConsent = localStorage.getItem('consentimento_coleta');
+      if (hasConsent !== 'true') {
+        this.showConsentModal = true;
+        return;
+      }
 
-    if (this.isMonitoring) {
+      this.isMonitoring = true;
       console.log("Iniciando monitoramento");
       const id = await this.logService.adicionarLog({
         dataHoraInicio: new Date(),
@@ -324,19 +330,31 @@ export class AppComponent {
       });
       this.currentLogId = id;
       this.setMonitoringInStorage();
-    } else if (!this.isMonitoring && this.currentLogId) {
-      console.log("Finalizando monitoramento: ", this.currentLogId);
-      await this.logService.atualizarLog(this.currentLogId, {
-        dataHoraFim: new Date()
-      });
+    } else {
+      this.isMonitoring = false;
+      if (this.currentLogId) {
+        console.log("Finalizando monitoramento: ", this.currentLogId);
+        await this.logService.atualizarLog(this.currentLogId, {
+          dataHoraFim: new Date()
+        });
 
-      const log = await this.logService.exportLog(this.currentLogId);
-      this.logExportService.exportLogTxt(log);
+        const log = await this.logService.exportLog(this.currentLogId);
+        this.logExportService.exportLogTxt(log);
 
-      this.currentLogId = undefined;
-      this.deleteMonitoring();
+        this.currentLogId = undefined;
+        this.deleteMonitoring();
+      }
     }
   }
+
+  onConsentCancelled = (): void => {
+    this.showConsentModal = false;
+  };
+
+  onConsentAccepted = async (): Promise<void> => {
+    this.showConsentModal = false;
+    await this.startMonitoring();
+  };
 
   goToComands() {
     document.getElementById('comands')?.focus();

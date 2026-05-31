@@ -12,6 +12,7 @@ import { WriteComponent } from './components/write/write.component';
 import { OperatorComponent } from './components/operator/operator.component';
 import { CommandButtonComponent } from './components/command-button/command-button.component';
 import { ConditionalComponent } from './components/conditional/conditional.component';
+import { ConsentModalComponent } from './components/consent-modal/consent-modal.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { ForComponent } from './components/for/for.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
@@ -31,7 +32,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     OperatorComponent,
     CommandButtonComponent,
     ConditionalComponent,
-    ForComponent
+    ForComponent,
+    ConsentModalComponent
   ],
   imports: [
     BrowserModule,

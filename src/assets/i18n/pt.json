@@ -89,5 +89,23 @@
   "TERMINAL": {
     "START": "Começo da execução...",
     "FINISH": "Fim da execução..."
+  },
+  "CONSENT_MODAL": {
+    "TITLE": "Aviso de Consentimento para Monitoramento",
+    "DESCRIPTION": "Este ambiente coleta dados de interação sobre o processo de aprendizagem em programação, a coleta ocorre apenas após o acionamento do botão de \"Monitorar Desempenho\" e cessa após clicar no botão \"Encerrar Monitoramento e Baixar Log\".",
+    "COLLECTED_DATA_TITLE": "Dados Coletados:",
+    "COLLECTED_DATA_1": "Data e hora de início e término da atividade.",
+    "COLLECTED_DATA_2": "Tempo total gasto na resolução.",
+    "COLLECTED_DATA_3": "Histórico de versões do código a cada tentativa de compilação.",
+    "COLLECTED_DATA_4": "ID da atividade em execução.",
+    "USAGE_TITLE": "Uso e Armazenamento:",
+    "USAGE_1": "Os dados são armazenados localmente no seu navegador e exportados em formato TXT ao final do monitoramento.",
+    "USAGE_2": "Podendo ser usadas para análise e melhoria de desempenho.",
+    "RIGHTS_TITLE": "Seus Direitos:",
+    "RIGHTS_1": "O monitoramento é opcional.",
+    "RIGHTS_2": "Você pode interromper a coleta a qualquer momento clicando em 'Encerrar Monitoramento', sem penalidades.",
+    "CHECKBOX": "Compreendo as informações acima e consinto com o monitoramento da minha atividade.",
+    "CANCEL": "Cancelar",
+    "CONSENT": "Consentir"
   }
 }

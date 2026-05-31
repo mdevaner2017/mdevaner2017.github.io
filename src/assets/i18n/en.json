@@ -89,5 +89,23 @@
   "TERMINAL": {
     "START": "Start of execution...",
     "FINISH": "End of execution..."
+  },
+  "CONSENT_MODAL": {
+    "TITLE": "Monitoring Consent Notice",
+    "DESCRIPTION": "This environment collects interaction data on the programming learning process, data collection only occurs after triggering the \"Monitor Performance\" button and stops after clicking the \"Stop Monitoring and Download Log\" button.",
+    "COLLECTED_DATA_TITLE": "Collected Data:",
+    "COLLECTED_DATA_1": "Start and end date and time of the activity.",
+    "COLLECTED_DATA_2": "Total time spent on resolution.",
+    "COLLECTED_DATA_3": "Code version history for each compilation attempt.",
+    "COLLECTED_DATA_4": "ID of the executing activity.",
+    "USAGE_TITLE": "Usage and Storage:",
+    "USAGE_1": "The data is stored locally in your browser and exported in TXT format at the end of the monitoring.",
+    "USAGE_2": "Which can be used for analysis and performance improvement.",
+    "RIGHTS_TITLE": "Your Rights:",
+    "RIGHTS_1": "Monitoring is optional.",
+    "RIGHTS_2": "You can stop collection at any time by clicking 'Stop Monitoring', without penalties.",
+    "CHECKBOX": "I understand the information above and consent to the monitoring of my activity.",
+    "CANCEL": "Cancel",
+    "CONSENT": "Consent"
   }
 }

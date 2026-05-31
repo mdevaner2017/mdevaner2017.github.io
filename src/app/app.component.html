@@ -117,3 +117,10 @@
 
     </div>
   </div>
+  
+  <app-consent-modal 
+    *ngIf="showConsentModal" 
+    (cancel)="onConsentCancelled()" 
+    (consent)="onConsentAccepted()">
+  </app-consent-modal>
+</div>
