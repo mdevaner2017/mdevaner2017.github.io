@@ -98,6 +98,7 @@ export class AppComponent {
 
   clear() {
     this.components = [];
+    this.setStorage();
   }
 
   setStorage() {
