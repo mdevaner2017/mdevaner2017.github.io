@@ -27,7 +27,7 @@ export class AppComponent {
   }
 
   ngOnInit(): void {
-    let defaultLang: any = sessionStorage.getItem("defaultLang");
+    let defaultLang: any = localStorage.getItem("defaultLang");
 
     if (!defaultLang || defaultLang == null || defaultLang == "") {
       defaultLang = "pt"
@@ -37,7 +37,7 @@ export class AppComponent {
     this.translate.setDefaultLang(defaultLang);
     this.translate.use(defaultLang);
 
-    const storageComponents = sessionStorage.getItem("components");
+    const storageComponents = localStorage.getItem("components");
 
     if (storageComponents) {
       this.components = JSON.parse(storageComponents);
@@ -47,7 +47,7 @@ export class AppComponent {
   }
 
   changeLanguage(language: string) {
-    sessionStorage.setItem("defaultLang", language);
+    localStorage.setItem("defaultLang", language);
     this.translate.use(language);
   }
 
@@ -102,24 +102,24 @@ export class AppComponent {
   }
 
   setStorage() {
-    sessionStorage.setItem("components", JSON.stringify(this.components));
+    localStorage.setItem("components", JSON.stringify(this.components));
   }
 
   setMonitoringInStorage() {
-    sessionStorage.setItem("isMonitoring", this.isMonitoring.toString());
-    sessionStorage.setItem("currentLogId", this.currentLogId?.toString() || "");
+    localStorage.setItem("isMonitoring", this.isMonitoring.toString());
+    localStorage.setItem("currentLogId", this.currentLogId?.toString() || "");
   }
 
   deleteMonitoring() {
-    sessionStorage.removeItem("isMonitoring");
-    sessionStorage.removeItem("currentLogId");
+    localStorage.removeItem("isMonitoring");
+    localStorage.removeItem("currentLogId");
   }
 
   getMonitoringInStorage() {
-    const isMonitoringSession = sessionStorage.getItem("isMonitoring") === "true";
+    const isMonitoringSession = localStorage.getItem("isMonitoring") === "true";
     if (isMonitoringSession) {
       this.isMonitoring = true;
-      this.currentLogId = parseInt(sessionStorage.getItem("currentLogId") || "0");
+      this.currentLogId = parseInt(localStorage.getItem("currentLogId") || "0");
     }
   }
 
