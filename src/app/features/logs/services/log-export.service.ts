@@ -41,6 +41,7 @@ export class LogExportService {
     txt += `Data Fim: ${dataFim}\n`;
     txt += `Tempo total: ${tempoTotal}\n`;
     txt += `Quantidade de Compilações: ${log.execucoes.length}\n`;
+    txt += `Versão Final do Código:${log.execucoes[log.execucoes.length - 1].codigo}\n\n`;
     txt += `Compilações:\n${this.formatarExecucoes(log.execucoes)}\n`;
 
     const nomeArquivo = this.getNomeArquivo(log.dataHoraInicio, log.dataHoraFim);
