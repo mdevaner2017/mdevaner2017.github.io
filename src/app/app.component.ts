@@ -321,7 +321,6 @@ export class AppComponent {
     }
 
     this.isMonitoring = true;
-    console.log("Iniciando monitoramento");
     const id = await this.logService.adicionarLog({
       dataHoraInicio: new Date(),
       dataHoraFim: null,
@@ -334,7 +333,6 @@ export class AppComponent {
   async stopMonitoring() {
     this.isMonitoring = false;
     if (this.currentLogId) {
-      console.log("Finalizando monitoramento: ", this.currentLogId);
       await this.logService.atualizarLog(this.currentLogId, {
         dataHoraFim: new Date()
       });
