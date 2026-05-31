@@ -314,36 +314,44 @@ export class AppComponent {
   }
 
   async startMonitoring() {
-    if (!this.isMonitoring) {
-      const hasConsent = localStorage.getItem('consentimento_coleta');
-      if (hasConsent !== 'true') {
-        this.showConsentModal = true;
-        return;
-      }
+    const hasConsent = localStorage.getItem('consentimento_coleta');
+    if (hasConsent !== 'true') {
+      this.showConsentModal = true;
+      return;
+    }
 
-      this.isMonitoring = true;
-      console.log("Iniciando monitoramento");
-      const id = await this.logService.adicionarLog({
-        dataHoraInicio: new Date(),
-        dataHoraFim: null,
-        execucoes: []
+    this.isMonitoring = true;
+    console.log("Iniciando monitoramento");
+    const id = await this.logService.adicionarLog({
+      dataHoraInicio: new Date(),
+      dataHoraFim: null,
+      execucoes: []
+    });
+    this.currentLogId = id;
+    this.setMonitoringInStorage();
+  }
+
+  async stopMonitoring() {
+    this.isMonitoring = false;
+    if (this.currentLogId) {
+      console.log("Finalizando monitoramento: ", this.currentLogId);
+      await this.logService.atualizarLog(this.currentLogId, {
+        dataHoraFim: new Date()
       });
-      this.currentLogId = id;
-      this.setMonitoringInStorage();
+
+      const log = await this.logService.exportLog(this.currentLogId);
+      this.logExportService.exportLogTxt(log);
+
+      this.currentLogId = undefined;
+      this.deleteMonitoring();
+    }
+  }
+
+  async handleMonitoring() {
+    if (!this.isMonitoring) {
+      await this.startMonitoring();
     } else {
-      this.isMonitoring = false;
-      if (this.currentLogId) {
-        console.log("Finalizando monitoramento: ", this.currentLogId);
-        await this.logService.atualizarLog(this.currentLogId, {
-          dataHoraFim: new Date()
-        });
-
-        const log = await this.logService.exportLog(this.currentLogId);
-        this.logExportService.exportLogTxt(log);
-
-        this.currentLogId = undefined;
-        this.deleteMonitoring();
-      }
+      await this.stopMonitoring();
     }
   }
 
@@ -353,7 +361,7 @@ export class AppComponent {
 
   onConsentAccepted = async (): Promise<void> => {
     this.showConsentModal = false;
-    await this.startMonitoring();
+    await this.handleMonitoring();
   };
 
   goToComands() {

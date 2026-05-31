@@ -33,7 +33,7 @@
 
         </div>
 
-        <button class="btn btn-info btn-sm p-3" (click)="startMonitoring()"
+        <button class="btn btn-info btn-sm p-3" (click)="handleMonitoring()"
           [title]="isMonitoring ? ('GENERAL.MENU.ALT_M_OFF' | translate) : ('GENERAL.MENU.ALT_M' | translate)">
           <i class="bi" [ngClass]="isMonitoring ? 'bi-pause-fill' : 'bi-play-fill'"></i>
           {{ isMonitoring ? ('GENERAL.MENU.MONITOR_OFF' | translate) : ("GENERAL.MENU.MONITOR" | translate) }}
@@ -117,10 +117,7 @@
 
     </div>
   </div>
-  
-  <app-consent-modal 
-    *ngIf="showConsentModal" 
-    (cancel)="onConsentCancelled()" 
-    (consent)="onConsentAccepted()">
+
+  <app-consent-modal *ngIf="showConsentModal" (cancel)="onConsentCancelled()" (consent)="onConsentAccepted()">
   </app-consent-modal>
 </div>
