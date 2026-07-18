@@ -1,7 +1,7 @@
 {
   "GENERAL": {
     "IVPROG": "Accessible iVProg",
-    "TITLE": "Start function",
+    "TITLE": "Commands Area",
     "RECEIVE": "receive",
     "READ_CODE": "Read code",
     "READ_EDIT": "Edit code",
@@ -13,17 +13,17 @@
       "ENGLISH": "English"
     },
     "MENU": {
-      "START": "Go start function",
-      "ALT_I": "ALT + I Go to start function",
+      "START": "Go to Commands Area",
+      "ALT_I": "ALT + I Go to Commands Area",
       "TERMINAL": "Go to terminal",
       "ALT_T": "ALT + T Go to terminal",
       "COMANDS": "Go to command list",
       "ALT_C": "ALT + C Go to command list",
       "PROGRAM": "Run program",
       "ALT_E": "ALT+E Run program",
-      "MONITOR": "Monitor Performance",
+      "MONITOR": "Record Activity",
       "MONITOR_OFF": "Stop Monitoring and Download Log",
-      "ALT_M": "ALT + M Monitor Performance",
+      "ALT_M": "ALT + M Record Activity",
       "ALT_M_OFF": "ALT + M Stop Monitoring and Download Log"
     },
     "BUTTON": {

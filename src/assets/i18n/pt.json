@@ -1,7 +1,7 @@
 {
   "GENERAL": {
     "IVPROG": "iVProg Acessível",
-    "TITLE": "Função início",
+    "TITLE": "Área de Comandos",
     "RECEIVE": "recebe",
     "READ_CODE": "Ler código",
     "READ_EDIT": "Editar código",
@@ -13,17 +13,17 @@
       "ENGLISH": "Inglês"
     },
     "MENU": {
-      "START": "Ir função inicio",
-      "ALT_I": "ALT + I Ir para função inicio",
+      "START": "Ir para Área de Comandos",
+      "ALT_I": "ALT + I Ir para Área de Comandos",
       "TERMINAL": "Ir para o terminal",
       "ALT_T": "ALT + T Ir para o terminal",
       "COMANDS": "Ir para a lista de comandos",
       "ALT_C": "ALT + C Ir para a lista de comandos",
       "PROGRAM": "Executar programa",
       "ALT_E": "ALT + E Executar programa",
-      "MONITOR": "Monitorar Desempenho",
+      "MONITOR": "Gravar Atividade",
       "MONITOR_OFF": "Encerrar Monitoramento e Baixar Log",
-      "ALT_M": "ALT + M Monitorar Desempenho",
+      "ALT_M": "ALT + M Gravar Atividade",
       "ALT_M_OFF": "ALT + M Encerrar Monitoramento e Baixar Log"
     },
     "BUTTON": {
