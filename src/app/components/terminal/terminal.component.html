@@ -21,7 +21,12 @@
                     [LOG] Gravando atividade<span class="loading-dots"></span>
                 </div>
 
-                <div id="cmd" *ngIf="!showConsent && !isRecordingLog">
+                <div *ngIf="isDownloadReady" id="terminal-download-box" tabindex="-1" style="color: white; outline: none; padding: 10px;">
+                    <span style="color: #FFEB3B; font-weight: bold;">Gravação finalizada.</span>
+                    <button id="btn-download-log" class="btn btn-link p-0 ms-2" style="color: #82b1ff; text-decoration: underline;" (click)="downloadAction.emit()">Baixar relatório da atividade</button>
+                </div>
+
+                <div id="cmd" *ngIf="!showConsent && !isRecordingLog && !isDownloadReady">
                     <div id="cursor"></div>
 
                     <div *ngIf="isRunning" tabindex="0" id="textTerminal">

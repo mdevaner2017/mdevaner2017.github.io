@@ -9,9 +9,11 @@ export class TerminalComponent implements OnInit {
   @Input('isRunning') isRunning: boolean = false;
   @Input() showConsent: boolean = false;
   @Input() isRecordingLog: boolean = false;
+  @Input() isDownloadReady: boolean = false;
   
   @Output() acceptConsent = new EventEmitter<void>();
   @Output() cancelConsent = new EventEmitter<void>();
+  @Output() downloadAction = new EventEmitter<void>();
 
   constructor() { }
 

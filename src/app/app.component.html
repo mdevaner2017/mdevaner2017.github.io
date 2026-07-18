@@ -120,8 +120,10 @@
           <app-terminal [isRunning]="isRunning"
                         [showConsent]="showConsentModal"
                         [isRecordingLog]="isRecordingLog"
+                        [isDownloadReady]="isDownloadReady"
                         (acceptConsent)="onConsentAccepted()"
-                        (cancelConsent)="onConsentCancelled()">
+                        (cancelConsent)="onConsentCancelled()"
+                        (downloadAction)="downloadLog()">
           </app-terminal>
         </div>
       </footer>

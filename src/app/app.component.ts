@@ -21,6 +21,8 @@ export class AppComponent {
   private currentLogId?: number;
   showConsentModal: boolean = false;
   isRecordingLog: boolean = false;
+  isDownloadReady: boolean = false;
+  downloadableLog: any = null;
 
   @ViewChildren('input') inputs!: QueryList<ElementRef>;
 
@@ -340,11 +342,23 @@ export class AppComponent {
       });
 
       const log = await this.logService.exportLog(this.currentLogId);
-      this.logExportService.exportLogTxt(log);
+      
+      this.downloadableLog = log;
+      this.isDownloadReady = true;
+      setTimeout(() => { document.getElementById('btn-download-log')?.focus(); }, 100);
 
       this.currentLogId = undefined;
       this.deleteMonitoring();
     }
+  }
+
+  downloadLog() {
+    if (this.downloadableLog) {
+      this.logExportService.exportLogTxt(this.downloadableLog);
+    }
+    this.isDownloadReady = false;
+    this.downloadableLog = null;
+    setTimeout(() => { document.getElementById('title-terminal')?.focus(); }, 100);
   }
 
   async handleMonitoring() {
