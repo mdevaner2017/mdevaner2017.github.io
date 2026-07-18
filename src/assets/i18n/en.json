@@ -22,9 +22,9 @@
       "PROGRAM": "Run program",
       "ALT_E": "ALT+E Run program",
       "MONITOR": "Record Activity",
-      "MONITOR_OFF": "Stop Monitoring and Download Log",
+      "MONITOR_OFF": "Stop Recording",
       "ALT_M": "ALT + M Record Activity",
-      "ALT_M_OFF": "ALT + M Stop Monitoring and Download Log"
+      "ALT_M_OFF": "ALT + M Stop Recording"
     },
     "BUTTON": {
       "RUN": "Execute",

@@ -22,9 +22,9 @@
       "PROGRAM": "Executar programa",
       "ALT_E": "ALT + E Executar programa",
       "MONITOR": "Gravar Atividade",
-      "MONITOR_OFF": "Encerrar Monitoramento e Baixar Log",
+      "MONITOR_OFF": "Encerrar Gravação",
       "ALT_M": "ALT + M Gravar Atividade",
-      "ALT_M_OFF": "ALT + M Encerrar Monitoramento e Baixar Log"
+      "ALT_M_OFF": "ALT + M Encerrar Gravação"
     },
     "BUTTON": {
       "RUN": "Executar",

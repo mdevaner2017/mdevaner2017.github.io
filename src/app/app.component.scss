@@ -55,3 +55,27 @@ h2{
     background-color: transparent;
     border: none;
 }
+
+.btn-ready-recording {
+  background-color: #4B0082;
+  border-color: #4B0082;
+  color: #ffffff;
+  
+  &:hover, &:focus {
+    background-color: #5B21B6;
+    border-color: #5B21B6;
+    color: #ffffff;
+  }
+}
+
+.btn-active-recording {
+  background-color: #D35400;
+  border-color: #D35400;
+  color: #ffffff;
+  
+  &:hover, &:focus {
+    background-color: #EA580C; 
+    border-color: #EA580C;
+    color: #ffffff;
+  }
+}
