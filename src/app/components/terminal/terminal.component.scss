@@ -58,3 +58,12 @@
 p {
     margin: 0;
 }
+
+.loading-dots::after {
+    content: '...';
+    animation: pulsar 1.2s infinite alternate;
+}
+@keyframes pulsar {
+    0% { opacity: 0.2; }
+    100% { opacity: 1; }
+}

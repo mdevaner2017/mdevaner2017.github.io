@@ -117,13 +117,15 @@
 
       <footer>
         <div class="col-12">
-          <app-terminal [isRunning]="isRunning"></app-terminal>
+          <app-terminal [isRunning]="isRunning"
+                        [showConsent]="showConsentModal"
+                        [isRecordingLog]="isRecordingLog"
+                        (acceptConsent)="onConsentAccepted()"
+                        (cancelConsent)="onConsentCancelled()">
+          </app-terminal>
         </div>
       </footer>
 
     </div>
   </div>
-
-  <app-consent-modal *ngIf="showConsentModal" (cancel)="onConsentCancelled()" (consent)="onConsentAccepted()">
-  </app-consent-modal>
 </div>

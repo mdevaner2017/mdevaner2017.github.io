@@ -20,6 +20,7 @@ export class AppComponent {
   isMonitoring: boolean = false;
   private currentLogId?: number;
   showConsentModal: boolean = false;
+  isRecordingLog: boolean = false;
 
   @ViewChildren('input') inputs!: QueryList<ElementRef>;
 
@@ -317,6 +318,7 @@ export class AppComponent {
     const hasConsent = localStorage.getItem('consentimento_coleta');
     if (hasConsent !== 'true') {
       this.showConsentModal = true;
+      setTimeout(() => { document.getElementById('terminal-consent-box')?.focus(); }, 100);
       return;
     }
 
@@ -355,11 +357,20 @@ export class AppComponent {
 
   onConsentCancelled = (): void => {
     this.showConsentModal = false;
+    setTimeout(() => { document.getElementById('btn-gravar-atividade')?.focus(); }, 100);
   };
 
   onConsentAccepted = async (): Promise<void> => {
     this.showConsentModal = false;
-    await this.handleMonitoring();
+    this.isRecordingLog = true;
+    setTimeout(() => { document.getElementById('log-recording-message')?.focus(); }, 100);
+    
+    setTimeout(async () => {
+      this.isRecordingLog = false;
+      localStorage.setItem('consentimento_coleta', 'true');
+      await this.handleMonitoring();
+      setTimeout(() => { document.getElementById('btn-gravar-atividade')?.focus(); }, 100);
+    }, 2000);
   };
 
   goToComands() {
