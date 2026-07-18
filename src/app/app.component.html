@@ -1,4 +1,9 @@
 <div class="container">
+  <nav aria-label="Links de Salto">
+    <a href="#area-comandos" class="visually-hidden-focusable">Saltar para Área de Comandos</a>
+    <a href="#btn-gravar-atividade" class="visually-hidden-focusable">Saltar para Gravar Atividade</a>
+    <a href="#btn-dropdown-comandos" class="visually-hidden-focusable">Saltar para Lista de Comandos</a>
+  </nav>
   <div class="d-flex justify-content-center mt-5">
     <div class="back-blue col-xl-10 col-lg-11 col-md-12 mt-5 rounded">
       <nav class="navbar navbar-expand-md navbar-dark p-4">
@@ -19,13 +24,13 @@
                   "GENERAL.MENU.TERMINAL" | translate }}</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" accesskey="ALT + C" href="#comands" (click)="goToComands()"
+              <a class="nav-link" accesskey="ALT + C" href="#btn-dropdown-comandos" (click)="goToComands()"
                 (keyup.space)="goToComands()" [title]="'GENERAL.MENU.ALT_C' | translate"><span aria-hidden="true">{{
                   "GENERAL.MENU.COMANDS" | translate }}</span></a>
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" accesskey="ALT + E" href="#comands" (click)="goToExecut()"
+              <a class="nav-link" accesskey="ALT + E" href="#btn-dropdown-comandos" (click)="goToExecut()"
                 (keyup.space)="goToExecut()" [title]="'GENERAL.MENU.ALT_E' | translate"><span aria-hidden="true">{{
                   "GENERAL.MENU.PROGRAM" | translate }}</span></a>
             </li>
@@ -33,7 +38,7 @@
 
         </div>
 
-        <button class="btn btn-info btn-sm p-3" (click)="handleMonitoring()"
+        <button id="btn-gravar-atividade" class="btn btn-info btn-sm p-3" (click)="handleMonitoring()"
           [title]="isMonitoring ? ('GENERAL.MENU.ALT_M_OFF' | translate) : ('GENERAL.MENU.ALT_M' | translate)">
           <i class="bi" [ngClass]="isMonitoring ? 'bi-pause-fill' : 'bi-play-fill'"></i>
           {{ isMonitoring ? ('GENERAL.MENU.MONITOR_OFF' | translate) : ("GENERAL.MENU.MONITOR" | translate) }}
@@ -50,7 +55,7 @@
         </button>
       </nav>
 
-      <section>
+      <section id="area-comandos" role="region" aria-label="Área de Comandos" tabindex="-1">
         <div class="col-12 px-4">
           <fieldset>
             <legend class="p-1">
