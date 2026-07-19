@@ -58,9 +58,11 @@
         <div class="d-flex justify-content-end">
             <app-command-button *ngIf="hasToggle" [mode]="'inline'" [text]="false" [title]="'Comandos'" [components]="components"
             [variables]="variables" (change)="setStorage()"></app-command-button>
-            <button class="btn btn-transparent" (click)="toggleHidden()">
-                <span *ngIf="isHidden" class="bi bi-unlock-fill" [title]="'GENERAL.READ_CODE' | translate"></span>
-                <span *ngIf="!isHidden" class="bi bi-lock-fill" [title]="'GENERAL.READ_EDIT' | translate"></span>
+            <button class="btn btn-transparent" (click)="toggleHidden()" 
+                    [attr.aria-label]="isHidden ? ('GENERAL.READ_CODE' | translate) : ('GENERAL.READ_EDIT' | translate)"
+                    [title]="isHidden ? ('GENERAL.READ_CODE' | translate) : ('GENERAL.READ_EDIT' | translate)">
+                <span *ngIf="isHidden" class="bi bi-unlock-fill" aria-hidden="true"></span>
+                <span *ngIf="!isHidden" class="bi bi-lock-fill" aria-hidden="true"></span>
             </button>
 
             <button class="btn btn-transparent text-danger pr-2" (click)="removeVariable()"

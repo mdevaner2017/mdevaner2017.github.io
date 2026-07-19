@@ -39,6 +39,11 @@
     border: none;
 }
 
+.btn-transparent:focus, .btn-transparent.focus {
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgb(38 143 255 / 50%);
+}
+
 .bi-lock-fill::before, .bi-unlock-fill::before{
     color:#17a2b8 !important;
 }

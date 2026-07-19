@@ -101,7 +101,7 @@ export class ForComponent implements OnInit {
     }
     else {
       setTimeout(() => {
-        document.getElementById("for-select-" + this.index)?.focus();
+        document.getElementById("for-select-var-" + this.index)?.focus();
       }, 200);
     }
   }

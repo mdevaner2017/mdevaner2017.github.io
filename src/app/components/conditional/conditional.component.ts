@@ -123,7 +123,7 @@ export class ConditionalComponent implements OnInit {
     }
     else {
       setTimeout(() => {
-        document.getElementById("select-var-" + this.index)?.focus();
+        document.getElementById("conditional-op-" + this.index + "-0")?.focus();
       }, 200);
     }
   }

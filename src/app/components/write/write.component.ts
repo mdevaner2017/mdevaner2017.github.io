@@ -52,6 +52,10 @@ export class WriteComponent implements OnInit {
       setTimeout(() => {
         document.getElementById("writer-cod-" + this.idElement)?.focus();
       }, 200);
+    } else {
+      setTimeout(() => {
+        document.getElementById("write-type-" + this.idElement)?.focus();
+      }, 200);
     }
   }
 

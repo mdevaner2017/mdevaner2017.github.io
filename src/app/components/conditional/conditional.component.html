@@ -157,9 +157,11 @@
                 [variables]="variables"
                 (change)="setStorage()"
             ></app-command-button>
-            <button class="btn btn-transparent" (click)="toggleHidden()">
-                <span *ngIf="isHidden" class="bi bi-unlock-fill"  [title]="'GENERAL.READ_CODE' | translate"><span class="sr-only">{{ "GENERAL.READ_CODE" | translate }}</span></span>
-                <span *ngIf="!isHidden" class="bi bi-lock-fill" [title]="'GENERAL.READ_EDIT' | translate"><span class="sr-only">{{ "GENERAL.READ_EDIT" | translate }}</span></span>
+            <button class="btn btn-transparent" (click)="toggleHidden()"
+                    [attr.aria-label]="isHidden ? ('GENERAL.READ_CODE' | translate) : ('GENERAL.READ_EDIT' | translate)"
+                    [title]="isHidden ? ('GENERAL.READ_CODE' | translate) : ('GENERAL.READ_EDIT' | translate)">
+                <span *ngIf="isHidden" class="bi bi-unlock-fill" aria-hidden="true"></span>
+                <span *ngIf="!isHidden" class="bi bi-lock-fill" aria-hidden="true"></span>
             </button>
 
             <button class="btn btn-transparent text-danger pr-2" (click)="removeConditional()" [title]="'GENERAL.REMOVE_COMANDS' | translate "><span aria-hidden="true">X</span></button>
