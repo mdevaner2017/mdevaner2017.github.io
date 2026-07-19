@@ -65,6 +65,20 @@
     "REPEAT_TO": "to",
     "REPEAT_THEN": "then"
   },
+  "ACCESSIBLE_MATH": {
+    "MULTIPLY": "times",
+    "DIVIDE": "divided by",
+    "ADD": "plus",
+    "SUBTRACT": "minus",
+    "GREATER": "greater than",
+    "LESS": "less than",
+    "GREATER_EQUAL": "greater than or equal to",
+    "LESS_EQUAL": "less than or equal to",
+    "EQUAL": "is equal to",
+    "NOT_EQUAL": "is not equal to",
+    "RECEIVE": "receives",
+    "SEMICOLON": "semicolon"
+  },
   "COMANDS": {
     "TITLE": "Commands",
     "TITLE2": "Do",

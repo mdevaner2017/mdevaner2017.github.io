@@ -3,9 +3,9 @@
         <div *ngIf="!isHidden" class="col-lg-9 d-flex justify-content-start">
             <p class="mb-0" [id]="'operator-cod-'+ index" tabindex="0">
                 <span>{{operator.reference}}</span>
-                <span aria-hidden="true">&lsaquo;-</span>
-                <span class="sr-only" tabindex="0">{{ "GENERAL.RECEIVE" | translate }}</span>
-                <span>{{operator.value}};</span>
+                <span [innerHTML]="'<-' | accessibleMath"></span>
+                <span [innerHTML]="operator.value | accessibleMath"></span>
+                <span [innerHTML]="';' | accessibleMath"></span>
             </p>
         </div>
 

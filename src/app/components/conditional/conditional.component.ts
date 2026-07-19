@@ -1,11 +1,13 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { AccessibleMathPipe } from '../../pipes/accessible-math.pipe';
 import { TypesEnum } from 'src/app/enums/types.enum';
 
 @Component({
   selector: 'app-conditional',
   templateUrl: './conditional.component.html',
-  styleUrls: ['./conditional.component.scss']
+  styleUrls: ['./conditional.component.scss'],
+  providers: [AccessibleMathPipe]
 })
 export class ConditionalComponent implements OnInit {
   isHidden: boolean = true;
@@ -32,7 +34,7 @@ export class ConditionalComponent implements OnInit {
   @Output("remove") remove = new EventEmitter();
   @Output("change") change = new EventEmitter();
 
-  constructor(public translate: TranslateService) { }
+  constructor(public translate: TranslateService, private accMath: AccessibleMathPipe) { }
 
   ngOnInit(): void {
     if (!this.conditional.conditionals) {
@@ -130,7 +132,8 @@ export class ConditionalComponent implements OnInit {
 
   formatCommands() {
     const currentLang = this.translate.currentLang;
-    this.commandsPlainText = `${currentLang == 'pt' ? 'se' : 'if'} ( ${this.conditional.condition.value} ) { <br/>`;
+    const condValue = this.accMath.transform(this.conditional.condition.value);
+    this.commandsPlainText = `${currentLang == 'pt' ? 'se' : 'if'} ( ${condValue} ) { <br/>`;
     this.commandsPlainText += `${this.runCommands(this.conditional.condition.components)}`;
     this.commandsPlainText += `} ${currentLang == 'pt' ? 'senao' : 'else'} { <br/>`;
     this.commandsPlainText += `${this.runCommands(this.conditional.nocondition.components)}`;
@@ -152,11 +155,11 @@ export class ConditionalComponent implements OnInit {
       }
 
       if (c.type == TypesEnum.OPERATOR) {
-        programComands += `&emsp; ${c.value.reference} <- ${c.value.value} <br/>`;
+        programComands += `&emsp; ${c.value.reference} ${this.accMath.transform('<-')} ${this.accMath.transform(c.value.value)} ${this.accMath.transform(';')} <br/>`;
       }
 
       if (c.type == TypesEnum.CONDITIONAL) {
-        programComands += `&emsp; ${currentLang == 'pt' ? 'se' : 'if'} ( ${c.value.condition.value} ) { <br/>`;
+        programComands += `&emsp; ${currentLang == 'pt' ? 'se' : 'if'} ( ${this.accMath.transform(c.value.condition.value)} ) { <br/>`;
         programComands += `&emsp; ${this.runCommands(c.value.condition.components)}`;
         programComands += `&emsp; } ${currentLang == 'pt' ? 'senao' : 'else'} { <br/>`;
         programComands += `&emsp; ${this.runCommands(c.value.nocondition.components)}`;

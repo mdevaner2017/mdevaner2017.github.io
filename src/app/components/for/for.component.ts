@@ -1,11 +1,13 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { AccessibleMathPipe } from '../../pipes/accessible-math.pipe';
 import { TypesEnum } from 'src/app/enums/types.enum';
 
 @Component({
   selector: 'app-for',
   templateUrl: './for.component.html',
-  styleUrls: ['./for.component.scss']
+  styleUrls: ['./for.component.scss'],
+  providers: [AccessibleMathPipe]
 })
 export class ForComponent implements OnInit {
   isHidden: boolean = true;
@@ -36,7 +38,7 @@ export class ForComponent implements OnInit {
   @Output("remove") remove = new EventEmitter();
   @Output("change") change = new EventEmitter();
 
-  constructor(public translate: TranslateService) { }
+  constructor(public translate: TranslateService, private accMath: AccessibleMathPipe) { }
 
   ngOnInit(): void {
   }
@@ -108,7 +110,8 @@ export class ForComponent implements OnInit {
 
   formatCommands() {
     const currentLang = this.translate.currentLang;
-    this.commandsPlainText = `<p class="mb-0">${currentLang == 'pt' ? 'repita_para' : 'repeat_for'} ${this.for.variable} ${currentLang == 'pt' ? 'de' : 'from'} ${this.for.startValue} <span tabindex="-1">${currentLang == 'pt' ? 'ate' : 'to'}</span>  ${this.for.finishValue} ${currentLang == 'pt' ? 'passo' : 'pass'} ${this.for.incrementType}${this.for.incrementValue} {</p>`;
+    const incType = this.accMath.transform(this.for.incrementType);
+    this.commandsPlainText = `<p class="mb-0">${currentLang == 'pt' ? 'repita_para' : 'repeat_for'} ${this.for.variable} ${currentLang == 'pt' ? 'de' : 'from'} ${this.for.startValue} <span tabindex="-1">${currentLang == 'pt' ? 'ate' : 'to'}</span>  ${this.for.finishValue} ${currentLang == 'pt' ? 'passo' : 'pass'} ${incType}${this.for.incrementValue} {</p>`;
     this.commandsPlainText += `<p>${this.runCommands(this.for.components)}</p>`;
     this.commandsPlainText += `<p>}</p>`;
   }
@@ -128,11 +131,11 @@ export class ForComponent implements OnInit {
       }
 
       if (c.type == TypesEnum.OPERATOR) {
-        programComands += `&emsp; ${c.value.reference} <- ${c.value.value} <br/>`;
+        programComands += `&emsp; ${c.value.reference} ${this.accMath.transform('<-')} ${this.accMath.transform(c.value.value)} ${this.accMath.transform(';')} <br/>`;
       }
 
       if (c.type == TypesEnum.CONDITIONAL) {
-        programComands += `&emsp; ${currentLang == 'pt' ? 'se' : 'if'} ( ${c.value.condition.value} ) { <br/>`;
+        programComands += `&emsp; ${currentLang == 'pt' ? 'se' : 'if'} ( ${this.accMath.transform(c.value.condition.value)} ) { <br/>`;
         programComands += `&emsp; ${this.runCommands(c.value.condition.components)}`;
         programComands += `&emsp; } ${currentLang == 'pt' ? 'senao' : 'else'} { <br/>`;
         programComands += `&emsp; ${this.runCommands(c.value.nocondition.components)}`;

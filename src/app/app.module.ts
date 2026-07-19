@@ -17,6 +17,7 @@ import { ForComponent } from './components/for/for.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { AccessibleMathPipe } from './pipes/accessible-math.pipe';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -31,7 +32,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     OperatorComponent,
     CommandButtonComponent,
     ConditionalComponent,
-    ForComponent
+    ForComponent,
+    AccessibleMathPipe
   ],
   imports: [
     BrowserModule,
@@ -50,7 +52,9 @@ export function HttpLoaderFactory(http: HttpClient) {
       }
     })
   ],
-  providers: [],
+  providers: [
+    AccessibleMathPipe
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

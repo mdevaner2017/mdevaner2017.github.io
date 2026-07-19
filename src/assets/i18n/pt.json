@@ -65,6 +65,20 @@
     "REPEAT_TO": "Até",
     "REPEAT_THEN": "Faça"
   },
+  "ACCESSIBLE_MATH": {
+    "MULTIPLY": "vezes",
+    "DIVIDE": "dividido por",
+    "ADD": "mais",
+    "SUBTRACT": "menos",
+    "GREATER": "maior que",
+    "LESS": "menor que",
+    "GREATER_EQUAL": "maior ou igual a",
+    "LESS_EQUAL": "menor ou igual a",
+    "EQUAL": "é igual a",
+    "NOT_EQUAL": "diferente de",
+    "RECEIVE": "recebe",
+    "SEMICOLON": "ponto e vírgula"
+  },
   "COMANDS": {
     "TITLE": "Comandos",
     "TITLE2": "Faça",
