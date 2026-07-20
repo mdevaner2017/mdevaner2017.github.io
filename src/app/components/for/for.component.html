@@ -11,7 +11,7 @@
                 <div class="col">
                     <div class="d-flex justify-content-center align-items-center pl-3">
                         <span class="blue"  id="for-select-{{index}}" tabindex="-1">{{ "GENERAL.REPEAT" | translate }}</span>
-                        <select id="for-select-var-{{index}}" class="ml-2 col form-select" [(ngModel)]="for.variable" (change)="setStorage()" >
+                        <select id="for-select-var-{{index}}" class="ml-2 col form-select" [(ngModel)]="for.variable" (change)="setStorage()" [title]="'GENERAL.SELECT_VARIABLE' | translate" [attr.aria-label]="'GENERAL.SELECT_VARIABLE' | translate">
                             <option *ngIf="!variables.length" disabled [ngValue]="''">{{ "GENERAL.NOT_VARIABLE" | translate }}</option>
                             <option *ngIf="variables.length" disabled [ngValue]="''">{{ "GENERAL.SELECT_VARIABLE" | translate }}</option>
                             <option *ngFor="let v of variables" [ngValue]="v.value.name">{{v.value.name}}</option>
@@ -22,19 +22,19 @@
                 <div class="col">
                     <div class="d-flex justify-content-center align-items-center">
                         <span tabindex="0">{{ "GENERAL.REPEAT_FROM" | translate }}</span>
-                        <select id="for-start-type-{{index}}" class="ml-1 form-select" [(ngModel)]="for.startType"  id="for-select-{{index}}" (change)="clearStartValue()">
+                        <select id="for-start-type-{{index}}" class="ml-1 form-select" [(ngModel)]="for.startType"  (change)="clearStartValue()" [title]="'GENERAL.SELECT_DATA_TYPE' | translate" [attr.aria-label]="'GENERAL.SELECT_DATA_TYPE' | translate">
                             <option [ngValue]="''" disabled>{{ "GENERAL.SELECT" | translate }}</option>
                             <option [ngValue]="'VARIABLE'">{{ "GENERAL.VARIABLE" | translate }}</option>
                             <option [ngValue]="'VALUE'">{{ "GENERAL.VALUE" | translate }}</option>
                         </select>
 
-                        <select id="for-start-value-{{index}}" class="ml-1 form-select" *ngIf="for.startType == 'VARIABLE'" [(ngModel)]="for.startValue" (change)="setStorage()">
+                        <select id="for-start-value-{{index}}" class="ml-1 form-select" *ngIf="for.startType == 'VARIABLE'" [(ngModel)]="for.startValue" (change)="setStorage()" [title]="'GENERAL.SELECT_VARIABLE' | translate" [attr.aria-label]="'GENERAL.SELECT_VARIABLE' | translate">
                             <option *ngIf="!variables.length" disabled [ngValue]="''">{{ "GENERAL.NOT_VARIABLE" | translate }}</option>
                             <option *ngIf="variables.length" disabled [ngValue]="''">{{ "GENERAL.SELECT_VARIABLE" | translate }}</option>
                             <option *ngFor="let v of variables" [ngValue]="v.value.name">{{v.value.name}}</option>
                         </select>
 
-                        <input id="for-start-value-{{index}}" class="ml-1 form-control" *ngIf="for.startType == 'VALUE'" [(ngModel)]="for.startValue" (change)="setStorage()" type="text" [placeholder]="'GENERAL.DIGIT_VALUE' | translate" />
+                        <input id="for-start-value-{{index}}" class="ml-1 form-control" *ngIf="for.startType == 'VALUE'" [(ngModel)]="for.startValue" (change)="setStorage()" type="text" [placeholder]="'GENERAL.DIGIT_VALUE' | translate" [title]="'GENERAL.DIGIT_VALUE' | translate" [attr.aria-label]="'GENERAL.DIGIT_VALUE' | translate" />
                     </div>
                 </div>
             </div>
@@ -43,30 +43,30 @@
                 <div class="col-7">
                     <div class="d-flex justify-content-center align-items-center p-3">
                         <span tabindex="0">{{ "GENERAL.REPEAT_TO" | translate }}</span>
-                        <select id="for-finish-type-{{index}}" class="ml-1 form-select" [(ngModel)]="for.finishType" (change)="clearFinishValue()">
+                        <select id="for-finish-type-{{index}}" class="ml-1 form-select" [(ngModel)]="for.finishType" (change)="clearFinishValue()" [title]="'GENERAL.SELECT_DATA_TYPE' | translate" [attr.aria-label]="'GENERAL.SELECT_DATA_TYPE' | translate">
                             <option [ngValue]="''" disabled>{{ "GENERAL.SELECT" | translate }}</option>
                             <option [ngValue]="'VARIABLE'">{{ "GENERAL.VARIABLE" | translate }}</option>
                             <option [ngValue]="'VALUE'">{{ "GENERAL.VALUE" | translate }}</option>
                         </select>
 
-                        <select id="for-finish-value-{{index}}" class="ml-1 form-select" *ngIf="for.finishType == 'VARIABLE'" [(ngModel)]="for.finishValue" (change)="setStorage()">
+                        <select id="for-finish-value-{{index}}" class="ml-1 form-select" *ngIf="for.finishType == 'VARIABLE'" [(ngModel)]="for.finishValue" (change)="setStorage()" [title]="'GENERAL.SELECT_VARIABLE' | translate" [attr.aria-label]="'GENERAL.SELECT_VARIABLE' | translate">
                             <option *ngIf="!variables.length" disabled [ngValue]="''">{{ "GENERAL.NOT_VARIABLE" | translate }}</option>
                             <option *ngIf="variables.length" disabled [ngValue]="''">{{ "GENERAL.SELECT_VARIABLE" | translate }}</option>
                             <option *ngFor="let v of variables" [ngValue]="v.value.name">{{v.value.name}}</option>
                         </select>
 
-                        <input id="for-finish-value-{{index}}" class="ml-1 form-control" *ngIf="for.finishType == 'VALUE'" [(ngModel)]="for.finishValue" (change)="setStorage()" type="text" [placeholder]="'GENERAL.DIGIT_VALUE' | translate" />
+                        <input id="for-finish-value-{{index}}" class="ml-1 form-control" *ngIf="for.finishType == 'VALUE'" [(ngModel)]="for.finishValue" (change)="setStorage()" type="text" [placeholder]="'GENERAL.DIGIT_VALUE' | translate" [title]="'GENERAL.DIGIT_VALUE' | translate" [attr.aria-label]="'GENERAL.DIGIT_VALUE' | translate" />
                     </div>
                 </div>
 
                 <div class="col-4 p-0">
                     <div class="d-flex justify-content-center align-items-center pt-3 pb-3">
-                        <select id="for-increment-type-{{index}}" class="ml-1 form-select" [(ngModel)]="for.incrementType" (change)="setStorage()">
+                        <select id="for-increment-type-{{index}}" class="ml-1 form-select" [(ngModel)]="for.incrementType" (change)="setStorage()" [title]="'GENERAL.SELECT_OPERATOR' | translate" [attr.aria-label]="'GENERAL.SELECT_OPERATOR' | translate">
                             <option [ngValue]="''" disabled>{{ "GENERAL.SELECT" | translate }}</option>
-                            <option [ngValue]="'+'" title="incremento">++</option>
-                            <option [ngValue]="'-'" title="decremento">&minus;&minus;</option>
+                            <option [ngValue]="'+'" [attr.aria-label]="'GENERAL.INCREMENT' | translate" [title]="'GENERAL.INCREMENT' | translate">++</option>
+                            <option [ngValue]="'-'" [attr.aria-label]="'GENERAL.DECREMENT' | translate" [title]="'GENERAL.DECREMENT' | translate">&minus;&minus;</option>
                         </select>
-                        <input id="for-increment-value-{{index}}" class="ml-1 form-control" [(ngModel)]="for.incrementValue" (change)="setStorage()" type="text" [placeholder]="'GENERAL.DIGIT_VALUE' | translate" />
+                        <input id="for-increment-value-{{index}}" class="ml-1 form-control" [(ngModel)]="for.incrementValue" (change)="setStorage()" type="text" [placeholder]="'GENERAL.DIGIT_VALUE' | translate" [title]="'GENERAL.STEP_VALUE' | translate" [attr.aria-label]="'GENERAL.STEP_VALUE' | translate" />
                     </div>
                 </div>
 

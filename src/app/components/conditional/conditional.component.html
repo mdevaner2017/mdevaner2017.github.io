@@ -17,7 +17,7 @@
                 <div class="d-flex align-items-center" *ngFor="let op of conditional.conditionals">
                     <div class="col">
                         <select class="form-select" id="conditional-op-{{index}}-{{op.index}}" *ngIf="op.type != 'CONDITIONAL'"
-                            [(ngModel)]="op.type" (change)="clearValue(op)">
+                            [(ngModel)]="op.type" (change)="clearValue(op)" [title]="'GENERAL.SELECT_DATA_TYPE' | translate" [attr.aria-label]="'GENERAL.SELECT_DATA_TYPE' | translate">
                             <option [ngValue]="''" selected>{{ "GENERAL.SELECT" | translate }}</option>
                             <option [ngValue]="'VARIABLE'">{{ "GENERAL.VARIABLE" | translate }}</option>
                             <option [ngValue]="'VALUE'">{{ "GENERAL.VALUE" | translate }}</option>
@@ -26,7 +26,7 @@
 
                     <div class="col">
                         <select id="conditional-op-{{index}}-{{op.index}}" class="ml-2 form-select" *ngIf="op.type == 'VARIABLE'" 
-                            [(ngModel)]="op.value" (change)="changeValue()">
+                            [(ngModel)]="op.value" (change)="changeValue()" [title]="'GENERAL.SELECT_VARIABLE' | translate" [attr.aria-label]="'GENERAL.SELECT_VARIABLE' | translate">
                             <option *ngIf="!variables.length" disabled [ngValue]="''">{{ "GENERAL.NOT_VARIABLE" | translate }}</option>
                             <option *ngIf="variables.length && op.value ==''" disabled [ngValue]="''">{{ "GENERAL.SELECT_VARIABLE" | translate }}</option>
                             <option *ngFor="let v of variables" [ngValue]="v.value.name">{{v.value.name}}</option>
@@ -35,12 +35,12 @@
 
                     <div class="col">
                         <input id="conditional-op-{{index}}-{{op.index}}" class="form-control" *ngIf="op.type == 'VALUE'" 
-                            [(ngModel)]="op.valueString" (keyup)="changeInputValue(op)" type="text" [placeholder]="'GENERAL.DIGIT_VALUE' | translate" />
+                            [(ngModel)]="op.valueString" (keyup)="changeInputValue(op)" type="text" [placeholder]="'GENERAL.DIGIT_VALUE' | translate" [title]="'GENERAL.DIGIT_VALUE' | translate" [attr.aria-label]="'GENERAL.DIGIT_VALUE' | translate" />
                     </div>
 
                     <div class="col">
                         <div ngbDropdown class="d-inline-block conditional-dropdown"  *ngIf="op.type == 'CONDITIONAL'">
-                            <button type="button" class="btn btn-outline-primary" id="conditional-op-{{index}}-{{op.index}}" tabindex="0" ngbDropdownToggle>
+                            <button type="button" class="btn btn-outline-primary" id="conditional-op-{{index}}-{{op.index}}" tabindex="0" ngbDropdownToggle [title]="'GENERAL.SELECT_OPERATOR' | translate" [attr.aria-label]="'GENERAL.SELECT_OPERATOR' | translate">
                                 <span tabindex="0">{{ op.value == '' ? 'Selecione a condição' : op.value }}</span>
                                 <!-- <span class="sr-only" tabindex="0">Selecione a condição</span> -->
                             </button>

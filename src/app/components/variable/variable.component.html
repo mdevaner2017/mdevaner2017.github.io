@@ -39,11 +39,11 @@
         </div>
 
         <div class="col-xl-3 col-lg-3 col-xs-12 col-md-3" *ngIf="variable.type == 'INTEGER' || variable.type == 'DOUBLE'">
-            <input id="variable-value-{{index}}" type="number" class="form-control" [title]="'VARIABLE.TYPE' | translate" [(ngModel)]="variable.value">
+            <input id="variable-value-{{index}}" type="number" class="form-control" [title]="('GENERAL.VALUE_OF' | translate) + ' ' + variable.name" [attr.aria-label]="('GENERAL.VALUE_OF' | translate) + ' ' + variable.name" [(ngModel)]="variable.value">
         </div>
 
         <div class="col-xl-3 col-lg-3 col-xs-12 col-md-3" *ngIf="variable.type == 'STRING'">
-            <input id="variable-value-{{index}}" type="text" class="form-control" [title]="'VARIABLE.TYPE' | translate" [(ngModel)]="variable.value">
+            <input id="variable-value-{{index}}" type="text" class="form-control" [title]="('GENERAL.VALUE_OF' | translate) + ' ' + variable.name" [attr.aria-label]="('GENERAL.VALUE_OF' | translate) + ' ' + variable.name" [(ngModel)]="variable.value" maxlength="30">
         </div>
 
         <div class="col-xl-3 col-lg-3 col-xs-12 col-md-3" *ngIf="variable.type == 'BOOLEAN'">

@@ -7,7 +7,7 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class AccessibleMathPipe implements PipeTransform {
 
-  constructor(private translate: TranslateService) {}
+  constructor(private translate: TranslateService) { }
 
   transform(value: string): string {
     if (!value) return '';
@@ -25,7 +25,7 @@ export class AccessibleMathPipe implements PipeTransform {
 
     res = res.replace(/>/g, getSpan('>', 'ACCESSIBLE_MATH.GREATER'));
     res = res.replace(/</g, getSpan('<', 'ACCESSIBLE_MATH.LESS'));
-    
+
     res = res.replace(/\*/g, getSpan('*', 'ACCESSIBLE_MATH.MULTIPLY'));
     res = res.replace(/\//g, getSpan('/', 'ACCESSIBLE_MATH.DIVIDE'));
     res = res.replace(/\+/g, getSpan('+', 'ACCESSIBLE_MATH.ADD'));
