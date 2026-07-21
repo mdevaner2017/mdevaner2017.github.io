@@ -58,6 +58,10 @@ export class ConditionalComponent implements OnInit {
     return component.type == TypesEnum.CONDITIONAL
   }
 
+  isFor(component: any) {
+    return component.type == TypesEnum.FOR_CODITIONAL
+  }
+
   removeComponent(components: any, index: number) {
     components.splice(index, 1);
     this.setStorage();

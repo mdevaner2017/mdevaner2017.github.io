@@ -151,6 +151,16 @@
                       (remove)="removeComponent(conditional.condition.components, $event)"
                       (change)="setStorage()">
                     </app-conditional>
+
+                    <app-for *ngIf="isFor(component)"
+                      [back]="true"
+                      [index]="i"
+                      [for]="component.value"
+                      [components]="conditional.condition.components"
+                      [variables]="variables"
+                      (remove)="removeComponent(conditional.condition.components, $event)"
+                      (change)="setStorage()">
+                    </app-for>
                 </div>
             </div>
 
@@ -205,6 +215,16 @@
                       (remove)="removeComponent(conditional.nocondition.components, $event)"
                       (change)="setStorage()">
                     </app-conditional>
+
+                    <app-for *ngIf="isFor(component)"
+                      [back]="true"
+                      [index]="i"
+                      [for]="component.value"
+                      [components]="conditional.nocondition.components"
+                      [variables]="variables"
+                      (remove)="removeComponent(conditional.nocondition.components, $event)"
+                      (change)="setStorage()">
+                    </app-for>
                 </div>
             </div>
         </div>

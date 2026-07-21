@@ -100,6 +100,7 @@
                         (change)="setStorage()"></app-command-button>
                     </div>
                   </div>
+                  <div id="execution-alert" aria-live="assertive" tabindex="-1" class="sr-only">{{ executionAlertMessage }}</div>
                   <button class="btn btn-success p-3" id="runCodeButton" type="button" (click)="run()">
                     {{ "GENERAL.BUTTON.RUN" | translate }}
                     <span class="bi bi-play-fill mt-3 space-icon"></span>

@@ -23,6 +23,7 @@ export class AppComponent {
   isRecordingLog: boolean = false;
   isDownloadReady: boolean = false;
   downloadableLog: any = null;
+  executionAlertMessage: string = '';
 
   @ViewChildren('input') inputs!: QueryList<ElementRef>;
 
@@ -127,6 +128,30 @@ export class AppComponent {
     }
   }
 
+  validateComponents(components: any[]): boolean {
+    if (!components) return true;
+    for (const c of components) {
+      if (c.type === TypesEnum.CONDITIONAL) {
+        if (!c.value || !c.value.conditionals || c.value.conditionals.length === 0) {
+          return false;
+        }
+        for (const op of c.value.conditionals) {
+          if (!op.type || op.value === '') {
+            return false;
+          }
+        }
+        if (!this.validateComponents(c.value.condition?.components) || !this.validateComponents(c.value.nocondition?.components)) {
+          return false;
+        }
+      } else if (c.type === TypesEnum.FOR_CODITIONAL) {
+        if (!this.validateComponents(c.value.components)) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
   runCommands(components: any) {
     // TODO: Vamos executar isso toda vez que o usuário editar o programa e guardar em algum canto
     const currentLang = "pt";
@@ -185,6 +210,18 @@ export class AppComponent {
   }
 
   run() {
+    this.executionAlertMessage = '';
+    const isValid = this.validateComponents(this.components);
+    if (!isValid) {
+      const msg = this.translate.currentLang === 'en' ? "Incomplete conditional structure. Please check the blocks before running." : "Estrutura de decisão incompleta. Verifique os blocos antes de executar.";
+      this.executionAlertMessage = msg;
+      setTimeout(() => {
+        const alertElement = document.getElementById("execution-alert");
+        if (alertElement) alertElement.focus();
+      }, 100);
+      return;
+    }
+
     const currentLang = "pt";
     let programComands = this.runCommands(this.components);
 
@@ -287,7 +324,8 @@ export class AppComponent {
 
       if (terminalElement && textTerminal) {
         let terminalContent = terminalElement.innerHTML;
-        terminalContent += `<p>${valor}</p>`;
+        let stringValue = (valor === 0 || valor === '0') ? '0 ' : String(valor);
+        terminalContent += `<p>${stringValue}</p>`;
         terminalElement.innerHTML = terminalContent;
         textTerminal.focus();
       }
