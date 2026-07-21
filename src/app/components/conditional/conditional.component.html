@@ -39,80 +39,29 @@
                     </div>
 
                     <div class="col">
-                        <div ngbDropdown class="d-inline-block conditional-dropdown"  *ngIf="op.type == 'CONDITIONAL'">
-                            <button type="button" class="btn btn-outline-primary" id="conditional-op-{{index}}-{{op.index}}" tabindex="0" ngbDropdownToggle [title]="'GENERAL.SELECT_OPERATOR' | translate" [attr.aria-label]="'GENERAL.SELECT_OPERATOR' | translate">
-                                <span tabindex="0">{{ op.value == '' ? 'Selecione a condição' : op.value }}</span>
-                                <!-- <span class="sr-only" tabindex="0">Selecione a condição</span> -->
-                            </button>
-
-                            <div ngbDropdownMenu attr.aria-labelledby="conditional-op-{{index}}-{{op.index}}">
-                                <div ngbDropdown placement="right">
-                                    <button type="button" class="btn btn-outline-primary" id="dropdown-conditional-{{index}}-{{op.index}}-aritmeticos"
-                                        ngbDropdownToggle>{{'GENERAL.MATH' | translate }}</button>
-                                    <div ngbDropdownMenu attr.aria-labelledby="dropdown-conditional-{{index}}-{{op.index}}-aritmeticos">
-                                        <button ngbDropdownItem (click)="changeConditional(op, '+', op.index)">
-                                            <span>&#43;</span>
-                                        </button>
-                                        <button ngbDropdownItem (click)="changeConditional(op, '-', op.index)">
-                                            <span>&minus;</span>
-                                        </button>
-                                        <button ngbDropdownItem (click)="changeConditional(op, '*', op.index)">
-                                            <span aria-hidden="true">&lowast;</span>
-                                            <span aria-hidden="false" class="sr-only">{{'GENERAL.MULTPLICATION' | translate }}</span>
-                                        </button>
-                                        <button ngbDropdownItem (click)="changeConditional(op, '/', op.index)">
-                                            <span>&divide;</span>
-                                        </button>
-                                        <button ngbDropdownItem (click)="changeConditional(op, '%', op.index)">
-                                            <span>%</span>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div ngbDropdown placement="right">
-                                    <button type="button" class="btn btn-outline-primary" id="dropdown-conditional-{{index}}-{{op.index}}-logicos"
-                                        ngbDropdownToggle>{{'GENERAL.LOGIC' | translate }}</button>
-                                    <div ngbDropdownMenu attr.aria-labelledby="dropdown-conditional-{{index}}-{{op.index}}-logicos">
-                                        <button ngbDropdownItem (click)="changeConditional(op, '==', op.index)">
-                                            <span>&#61;&#61;</span>
-                                        </button>
-                                        <button ngbDropdownItem (click)="changeConditional(op, 'E', op.index)">
-                                            <span>{{'GENERAL.AND' | translate }}</span>
-                                        </button>
-                                        <button ngbDropdownItem (click)="changeConditional(op, 'OU', op.index)">
-                                            <span>{{'GENERAL.OR' | translate }}</span>
-                                        </button>
-                                        <button ngbDropdownItem (click)="changeConditional(op, 'nao', op.index)">
-                                            <span>{{'GENERAL.NO' | translate }}</span>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div ngbDropdown placement="right">
-                                    <button type="button" class="btn btn-outline-primary" id="dropdown-conditional-{{index}}-{{op.index}}-relacionais"
-                                        ngbDropdownToggle>{{'GENERAL.RELATIONAL' | translate }}</button>
-                                    <div ngbDropdownMenu attr.aria-labelledby="dropdown-conditional-{{index}}-{{op.index}}-relacionais">
-                                        <button ngbDropdownItem (click)="changeConditional(op, '>', op.index)">
-                                            <span>&#62;</span>
-                                        </button>
-                                        <button ngbDropdownItem (click)="changeConditional(op, '<', op.index)">
-                                            <span>&#60;</span>
-                                        </button>
-                                        <button ngbDropdownItem (click)="changeConditional(op, '==', op.index)">
-                                            <span>&#61;&#61;</span>
-                                        </button>
-                                        <button ngbDropdownItem (click)="changeConditional(op, '!=', op.index)">
-                                            <span aria-hidden="true">!&#61;</span>
-                                            <span aria-hidden="false" class="sr-only">{{'GENERAL.EXCLAMATION' | translate }}</span>
-                                        </button>
-                                        <button ngbDropdownItem (click)="changeConditional(op, '>=', op.index)">
-                                            <span>&#8805;</span>
-                                        </button>
-                                        <button ngbDropdownItem (click)="changeConditional(op, '<=', op.index)">
-                                            <span>&#8804;</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <select class="form-select conditional-dropdown" *ngIf="op.type == 'CONDITIONAL'" id="conditional-op-{{index}}-{{op.index}}" tabindex="0" [(ngModel)]="op.value" (change)="changeConditional(op, op.value, op.index)" [title]="'GENERAL.SELECT_OPERATOR' | translate" [attr.aria-label]="'GENERAL.SELECT_OPERATOR' | translate">
+                            <option [ngValue]="''" disabled *ngIf="op.value == ''">{{ "GENERAL.CONDITIONAL" | translate }}</option>
+                            <optgroup [label]="'GENERAL.MATH' | translate">
+                                <option [ngValue]="'+'">+</option>
+                                <option [ngValue]="'-'">-</option>
+                                <option [ngValue]="'*'">*</option>
+                                <option [ngValue]="'/'">/</option>
+                                <option [ngValue]="'%'">%</option>
+                            </optgroup>
+                            <optgroup [label]="'GENERAL.LOGIC' | translate">
+                                <option [ngValue]="'E'">E</option>
+                                <option [ngValue]="'OU'">OU</option>
+                                <option [ngValue]="'nao'">nao</option>
+                            </optgroup>
+                            <optgroup [label]="'GENERAL.RELATIONAL' | translate">
+                                <option [ngValue]="'>'">&gt;</option>
+                                <option [ngValue]="'<'">&lt;</option>
+                                <option [ngValue]="'=='">==</option>
+                                <option [ngValue]="'!='">!=</option>
+                                <option [ngValue]="'>='">&gt;=</option>
+                                <option [ngValue]="'<='">&lt;=</option>
+                            </optgroup>
+                        </select>
                     </div>
                 </div>
 

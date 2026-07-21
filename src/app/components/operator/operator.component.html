@@ -98,21 +98,21 @@
                 </button>
 
                 <div ngbDropdownMenu aria-labelledby="dropdownAdd">
-                    <button ngbDropdownItem (click)="addOperator('PARENTHESIS', '(')">
+                    <button class="dropdown-item" tabindex="0" (click)="addOperator('PARENTHESIS', '(')">
                         <span aria-hidden="true">(</span>
                         <span aria-hidden="false" class="sr-only">{{'GENERAL.OPEN_PARENTHESES' | translate }}</span>
                     </button>
-                      <button ngbDropdownItem (click)="addOperator('PARENTHESIS', ')')">
+                      <button class="dropdown-item" tabindex="0" (click)="addOperator('PARENTHESIS', ')')">
                         <span aria-hidden="true">)</span>
                         <span aria-hidden="false" class="sr-only">{{'GENERAL.CLOSE_PARENTHESES' | translate }}</span>
                     </button>
-                    <button ngbDropdownItem (click)="addOperator('VARIABLE')">
+                    <button class="dropdown-item" tabindex="0" (click)="addOperator('VARIABLE')">
                         <span>{{ "GENERAL.VARIABLE" | translate }}</span>
                     </button>
-                    <button ngbDropdownItem (click)="addOperator('VALUE')">
+                    <button class="dropdown-item" tabindex="0" (click)="addOperator('VALUE')">
                         <span>{{ "GENERAL.VALUE" | translate }}</span>
                     </button>
-                    <button ngbDropdownItem (click)="addOperator('OPERATOR')" *ngIf="(operator.currentVariable?.type == 'INTEGER' || operator.currentVariable?.type == 'DOUBLE') && operator.operators.length > 0">
+                    <button class="dropdown-item" tabindex="0" (click)="addOperator('OPERATOR')" *ngIf="(operator.currentVariable?.type == 'INTEGER' || operator.currentVariable?.type == 'DOUBLE') && operator.operators.length > 0">
                         <span>{{ "GENERAL.OPERATOR_MATH" | translate }}</span>
                     </button>
                 </div>
