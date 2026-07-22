@@ -1,15 +1,20 @@
 <div ngbDropdown class="d-inline-block {{ mode }}">
-    <button id="btn-dropdown-comandos" type="button" class="dropdown btn btn-primary p-3" ngbDropdownToggle title="{{title}}">
+    <button id="btn-dropdown-comandos" type="button" class="dropdown btn btn-primary p-3" ngbDropdownToggle
+        title="{{title}}">
         <span *ngIf="text == true && text2==false">{{ "COMANDS.TITLE" | translate }}</span>
         <span *ngIf="text == false && iconComands ==true" class="bi bi-code-slash"></span>
         <span *ngIf="text == false && iconComands == false" class="bi bi-code-slash"></span>
         <span class="color-black" *ngIf="text2 == true" tabindex="-1">{{ "COMANDS.TITLE2" | translate }}</span>
     </button>
     <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-        <button class="dropdown-item" tabindex="0" *ngIf="hasVariables" (click)="addVariable()">{{ "COMANDS.BUTTON.NEW_VARIABLE" | translate }}</button>
-        <button class="dropdown-item" tabindex="0" (click)="addOperator()">{{ "COMANDS.BUTTON.MATH" | translate }}</button>
-        <button class="dropdown-item" tabindex="0" (click)="addWriter()">{{ "COMANDS.BUTTON.WRITE" | translate }} </button>
-        <button class="dropdown-item" tabindex="0" (click)="addConditional()">{{ "COMANDS.BUTTON.IF" | translate }}</button>
+        <button class="dropdown-item" tabindex="0" *ngIf="hasVariables" (click)="addVariable()">{{
+            "COMANDS.BUTTON.NEW_VARIABLE" | translate }}</button>
+        <button class="dropdown-item" tabindex="0" (click)="addOperator()">{{ "COMANDS.BUTTON.MATH" | translate
+            }}</button>
+        <button class="dropdown-item" tabindex="0" (click)="addWriter()">{{ "COMANDS.BUTTON.WRITE" | translate }}
+        </button>
+        <button class="dropdown-item" tabindex="0" (click)="addConditional()">{{ "COMANDS.BUTTON.IF" | translate
+            }}</button>
         <button class="dropdown-item" tabindex="0" (click)="addFor()">{{ "COMANDS.BUTTON.WHILE" | translate }}</button>
     </div>
 </div>

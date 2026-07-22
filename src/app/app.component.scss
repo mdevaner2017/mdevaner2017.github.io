@@ -1,72 +1,92 @@
 fieldset {
-    width: 100%;
-    background-color: white;
-    position: relative;
-    display: block;
-    margin-top: 15px;
-    border-radius: 10px;
+  width: 100%;
+  background-color: white;
+  position: relative;
+  display: block;
+  margin-top: 15px;
+  border-radius: 10px;
 }
 
 legend {
-    width: 200px;
-    border: 3px solid silver;
-    border-radius: 10px;
-    background-color: #3d8bd4;
-    margin-left: 50px;
-    margin-top: -15px;
+  width: 200px;
+  border: 3px solid silver;
+  border-radius: 10px;
+  background-color: #3d8bd4;
+  margin-left: 50px;
+  margin-top: -15px;
 }
 
-h1:last-child, h2:last-child, h3:last-child, h4:last-child, h5:last-child {
-    margin-bottom: 0;
+h1:last-child,
+h2:last-child,
+h3:last-child,
+h4:last-child,
+h5:last-child {
+  margin-bottom: 0;
 }
 
 legend h1 {
-    font-size: 20px;
-    font-family: "Segoe UI", "Arial", "Times New Roman";
-    color: white;
-    padding-left: 10px;
-}
-.btn-primary{
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-}
-.space-icon{
-    height: 1.19em;
-    font-size: 12px;
+  font-size: 20px;
+  font-family: "Segoe UI", "Arial", "Times New Roman";
+  color: white;
+  padding-left: 10px;
 }
 
-h1:focus{
-    color: #3083ff;
+.btn-primary {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
 }
-h1{
-    font-size: 1.2rem;
-    margin-bottom: 0;
-    color: #fff;
+
+.space-icon {
+  height: 1.19em;
+  font-size: 12px;
 }
-h2{
-    font-size: 1.2rem;
-    color: #fff;
+
+h1:focus {
+  color: #3083ff;
 }
-.nav-link{
-    margin-left: 5px;
-    color: white;
+
+h1 {
+  font-size: 1.2rem;
+  margin-bottom: 0;
+  color: #fff;
 }
+
+h2 {
+  font-size: 1.2rem;
+  color: #fff;
+}
+
+.nav-link {
+  margin-left: 5px;
+  color: white;
+
+  .box-link {
+    background-color: #fff;
+    color: #002350;
+    padding: 4px 8px;
+    border-radius: 4px;
+    margin-right: 12px;
+    font-weight: 500;
+  }
+}
+
 .button-flag {
-    background-color: transparent;
-    border: none;
+  background-color: transparent;
+  border: none;
 }
 
 .btn-ready-recording {
   background-color: #4B0082;
   border-color: #4B0082;
   color: #ffffff;
-  
-  &:hover, &:focus {
+
+  &:hover,
+  &:focus {
     background-color: #5B21B6;
     border-color: #5B21B6;
     color: #ffffff;
   }
-  
+
   &:focus {
     outline: none;
     box-shadow: 0 0 0 0.25rem rgba(75, 0, 130, 0.5);
@@ -77,15 +97,47 @@ h2{
   background-color: #D35400;
   border-color: #D35400;
   color: #ffffff;
-  
-  &:hover, &:focus {
-    background-color: #EA580C; 
+
+  &:hover,
+  &:focus {
+    background-color: #EA580C;
     border-color: #EA580C;
     color: #ffffff;
   }
-  
+
   &:focus {
     outline: none;
     box-shadow: 0 0 0 0.25rem rgba(211, 84, 0, 0.5);
+  }
+}
+
+#area-comandos-terminal {
+  background-color: #1455AA;
+  margin: 0 24px;
+  border-radius: 12px;
+}
+
+.logo-ivprog {
+  height: 68px;
+}
+
+footer {
+  padding: 8px 24px;
+  color: #fff;
+
+  .logo-lumia {
+    height: 64px;
+  }
+
+  .footer-copy-text {
+    font-weight: 300;
+
+    p {
+      margin: 0;
+    }
+  }
+
+  span {
+    font-weight: 300;
   }
 }

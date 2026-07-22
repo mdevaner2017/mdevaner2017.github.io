@@ -357,12 +357,17 @@ export class AppComponent {
   async startMonitoring() {
     const hasConsent = localStorage.getItem('consentimento_coleta');
     if (hasConsent !== 'true') {
+      this.clear(); // Limpar terminal histórico anterior (opcionalmente apenas clear, já limpa e zera os logs)
       this.showConsentModal = true;
-      setTimeout(() => { document.getElementById('terminal-consent-box')?.focus(); }, 100);
+      setTimeout(() => { document.getElementById('title-terminal')?.focus(); }, 100);
       return;
     }
 
     this.isMonitoring = true;
+    this.isRecordingLog = true;
+    
+    setTimeout(() => { document.getElementById('log-recording-message')?.focus(); }, 100);
+
     const id = await this.logService.adicionarLog({
       dataHoraInicio: new Date(),
       dataHoraFim: null,
@@ -370,17 +375,20 @@ export class AppComponent {
     });
     this.currentLogId = id;
     this.setMonitoringInStorage();
+
+    setTimeout(() => { document.getElementById('btn-gravar-atividade')?.focus(); }, 3500);
   }
 
   async stopMonitoring() {
     this.isMonitoring = false;
+    this.isRecordingLog = false;
     if (this.currentLogId) {
       await this.logService.atualizarLog(this.currentLogId, {
         dataHoraFim: new Date()
       });
 
       const log = await this.logService.exportLog(this.currentLogId);
-      
+
       this.downloadableLog = log;
       this.isDownloadReady = true;
       setTimeout(() => { document.getElementById('btn-download-log')?.focus(); }, 100);
@@ -414,15 +422,8 @@ export class AppComponent {
 
   onConsentAccepted = async (): Promise<void> => {
     this.showConsentModal = false;
-    this.isRecordingLog = true;
-    setTimeout(() => { document.getElementById('log-recording-message')?.focus(); }, 100);
-    
-    setTimeout(async () => {
-      this.isRecordingLog = false;
-      localStorage.setItem('consentimento_coleta', 'true');
-      await this.handleMonitoring();
-      setTimeout(() => { document.getElementById('btn-gravar-atividade')?.focus(); }, 100);
-    }, 2000);
+    localStorage.setItem('consentimento_coleta', 'true');
+    await this.handleMonitoring();
   };
 
   goToComands() {
@@ -433,8 +434,8 @@ export class AppComponent {
     document.getElementById('inicio')?.focus();
   }
 
-  goToTerminal() {
-    document.getElementById('title-terminal')?.focus();
+  goToGravarAtividade() {
+    document.getElementById('btn-gravar-atividade')?.focus();
   }
 
   goToExecut() {
@@ -452,8 +453,8 @@ export class AppComponent {
       this.pressedAlt = false;
     }
 
-    if (event.altKey && event.code == "KeyT") {
-      this.goToTerminal();
+    if (event.altKey && event.code == "KeyG") {
+      this.goToGravarAtividade();
       this.pressedAlt = false;
     }
 

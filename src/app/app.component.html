@@ -6,46 +6,37 @@
   </nav>
   <div class="d-flex justify-content-center mt-5">
     <div class="back-blue col-xl-10 col-lg-11 col-md-12 mt-5 rounded">
-      <nav class="navbar navbar-expand-md navbar-dark p-4">
-        <header>
-          <h1><strong>{{ "GENERAL.IVPROG" | translate }}</strong></h1>
-        </header>
-
+      <nav class="navbar navbar-expand-md navbar-dark py-4 px-4">
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item">
               <a class="nav-link" accesskey="ALT + I" href="#inicio" (click)="goToStart()" (keyup.space)="goToStart()"
-                [title]="'GENERAL.MENU.ALT_I' | translate"><span aria-hidden="true">{{ "GENERAL.MENU.START" | translate
-                  }}</span></a>
+                [title]="'GENERAL.MENU.ALT_I' | translate">
+                <span class="box-link">1</span>
+                <span aria-hidden="true">{{ "GENERAL.MENU.START" | translate}}</span>
+              </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" accesskey="ALT + T" href="#terminal" (click)="goToTerminal()"
-                (keyup.space)="goToTerminal()" [title]="'GENERAL.MENU.ALT_T' | translate"><span aria-hidden="true">{{
-                  "GENERAL.MENU.TERMINAL" | translate }}</span></a>
+              <a class="nav-link" accesskey="ALT + G" href="#btn-gravar-atividade" (click)="goToGravarAtividade()"
+                (keyup.space)="goToGravarAtividade()" [title]="'GENERAL.MENU.ALT_G' | translate">
+                <span class="box-link">2</span>
+                <span aria-hidden="true">{{"GENERAL.MENU.MONITORING" | translate }}</span>
+              </a>
             </li>
             <li class="nav-item">
               <a class="nav-link" accesskey="ALT + C" href="#btn-dropdown-comandos" (click)="goToComands()"
-                (keyup.space)="goToComands()" [title]="'GENERAL.MENU.ALT_C' | translate"><span aria-hidden="true">{{
-                  "GENERAL.MENU.COMANDS" | translate }}</span></a>
-            </li>
-
-            <li class="nav-item">
-              <a class="nav-link" accesskey="ALT + E" href="#btn-dropdown-comandos" (click)="goToExecut()"
-                (keyup.space)="goToExecut()" [title]="'GENERAL.MENU.ALT_E' | translate"><span aria-hidden="true">{{
-                  "GENERAL.MENU.PROGRAM" | translate }}</span></a>
+                (keyup.space)="goToComands()" [title]="'GENERAL.MENU.ALT_C' | translate">
+                <span class="box-link">3</span>
+                <span aria-hidden="true">{{"GENERAL.MENU.COMANDS" | translate }}</span>
+              </a>
             </li>
           </ul>
 
         </div>
 
-        <button id="btn-gravar-atividade" class="btn btn-sm p-3" (click)="handleMonitoring()"
-          [ngClass]="isMonitoring ? 'btn-active-recording' : 'btn-ready-recording'"
-          [title]="isMonitoring ? ('GENERAL.MENU.ALT_M_OFF' | translate) : ('GENERAL.MENU.ALT_M' | translate)">
-          <i class="bi" [ngClass]="isMonitoring ? 'bi-stop-fill' : 'bi-play-fill'"></i>
-          {{ isMonitoring ? ('GENERAL.MENU.MONITOR_OFF' | translate) : ("GENERAL.MENU.MONITOR" | translate) }}
-        </button>
+        <img src="../assets/images/logo_VprogForms.png" alt="Logo iVProg Forms" class="ms-auto logo-ivprog" />
 
-        <button class="button-flag" (click)="changeLanguage('pt')"
+        <!-- <button class="button-flag" (click)="changeLanguage('pt')"
           title="{{ 'GENERAL.LANGUAGES.PORTUGUESE' | translate }}">
           <img src="../assets/images/brazil.svg" width="30" />
         </button>
@@ -53,82 +44,94 @@
         <button class="button-flag" (click)="changeLanguage('en')"
           title="{{ 'GENERAL.LANGUAGES.ENGLISH' | translate }}">
           <img src="../assets/images/united-states.svg" width="29" />
-        </button>
+        </button> -->
+
+
       </nav>
 
-      <section id="area-comandos" role="region" aria-label="Área de Comandos" tabindex="-1">
-        <div class="col-12 px-4">
-          <fieldset>
-            <legend class="p-1">
-              <h2 tabindex="0" id="inicio"><strong> {{ "GENERAL.TITLE" | translate }}</strong></h2>
-            </legend>
+      <div id="area-comandos-terminal" class="d-flex flex-column">
+        <section id="area-comandos" role="region" aria-label="Área de Comandos" tabindex="-1">
+          <div class="col-12 px-4 pt-4">
+            <fieldset>
+              <legend class="p-1">
+                <h2 tabindex="0" id="inicio"><strong> {{ "GENERAL.TITLE" | translate }}</strong></h2>
+              </legend>
 
-            <div class="row">
-              <div class="col-12 pt-1 pb-4 px-4" style="text-align: right;">
-                <div class="px-4 py-1">
-                  <div *ngFor="let component of components; let i = index;">
-                    <app-variable *ngIf="isVariable(component)" [index]="i" [variable]="component.value"
-                      [components]="components" [variables]="getVariables()" (remove)="removeComponent($event)"
-                      (change)="setStorage()">
-                    </app-variable>
+              <div class="row">
+                <div class="col-12 pt-1 pb-4 px-4" style="text-align: right;">
+                  <div class="px-4 py-1">
+                    <div *ngFor="let component of components; let i = index;">
+                      <app-variable *ngIf="isVariable(component)" [index]="i" [variable]="component.value"
+                        [components]="components" [variables]="getVariables()" (remove)="removeComponent($event)"
+                        (change)="setStorage()">
+                      </app-variable>
 
-                    <app-write *ngIf="isWriter(component)" [index]="i" [writer]="component.value"
-                      [components]="components" [variables]="getVariables()" (remove)="removeComponent($event)"
-                      (change)="setStorage()">
-                    </app-write>
+                      <app-write *ngIf="isWriter(component)" [index]="i" [writer]="component.value"
+                        [components]="components" [variables]="getVariables()" (remove)="removeComponent($event)"
+                        (change)="setStorage()">
+                      </app-write>
 
-                    <app-operator *ngIf="isOperator(component)" [index]="i" [operator]="component.value"
-                      [components]="components" [variables]="getVariables()" (remove)="removeComponent($event)"
-                      (change)="setStorage()">
-                    </app-operator>
+                      <app-operator *ngIf="isOperator(component)" [index]="i" [operator]="component.value"
+                        [components]="components" [variables]="getVariables()" (remove)="removeComponent($event)"
+                        (change)="setStorage()">
+                      </app-operator>
 
-                    <app-conditional *ngIf="isConditional(component)" [index]="i" [conditional]="component.value"
-                      [components]="components" [variables]="getVariables()" (remove)="removeComponent($event)"
-                      (change)="setStorage()">
-                    </app-conditional>
+                      <app-conditional *ngIf="isConditional(component)" [index]="i" [conditional]="component.value"
+                        [components]="components" [variables]="getVariables()" (remove)="removeComponent($event)"
+                        (change)="setStorage()">
+                      </app-conditional>
 
-                    <app-for *ngIf="isFor(component)" [index]="i" [for]="component.value" [components]="components"
-                      [variables]="getVariables()" (remove)="removeComponent($event)" (change)="setStorage()">
-                    </app-for>
-                  </div>
-                </div>
-
-                <div id="botoes" class="btn-group pt-4">
-                  <div class="row">
-                    <div class="col">
-                      <app-command-button [components]="components" [variables]="getVariables()"
-                        (change)="setStorage()"></app-command-button>
+                      <app-for *ngIf="isFor(component)" [index]="i" [for]="component.value" [components]="components"
+                        [variables]="getVariables()" (remove)="removeComponent($event)" (change)="setStorage()">
+                      </app-for>
                     </div>
                   </div>
-                  <div id="execution-alert" aria-live="assertive" tabindex="-1" class="sr-only">{{ executionAlertMessage }}</div>
-                  <button class="btn btn-success p-3" id="runCodeButton" type="button" (click)="run()">
-                    {{ "GENERAL.BUTTON.RUN" | translate }}
-                    <span class="bi bi-play-fill mt-3 space-icon"></span>
-                  </button>
-                  <button class="btn btn-danger p-3" id="cleanCommands" type="button" (click)="clear()">
-                    {{ "GENERAL.BUTTON.DELETE" | translate }}
-                    <span class="bi bi-trash-fill space-icon"></span>
-                  </button>
+
+                  <div id="botoes" class="d-flex flex-wrap pt-4 gap-2 justify-content-end">
+                    <button id="btn-gravar-atividade" class="btn btn-sm p-3" (click)="handleMonitoring()"
+                      [ngClass]="isMonitoring ? 'btn-active-recording' : 'btn-ready-recording'"
+                      [title]="isMonitoring ? ('GENERAL.MENU.ALT_M_OFF' | translate) : ('GENERAL.MENU.ALT_M' | translate)">
+                      <i class="bi" [ngClass]="isMonitoring ? 'bi-stop-fill' : 'bi-play-fill'"></i>
+                      {{ isMonitoring ? ('GENERAL.MENU.MONITOR_OFF' | translate) : ("GENERAL.MENU.MONITOR" | translate)
+                      }}
+                    </button>
+                    <app-command-button [components]="components" [variables]="getVariables()"
+                      (change)="setStorage()"></app-command-button>
+                    <div id="execution-alert" aria-live="assertive" tabindex="-1" class="sr-only">
+                      {{ executionAlertMessage }}
+                    </div>
+                    <button class="btn btn-success p-3" id="runCodeButton" type="button" (click)="run()">
+                      {{ "GENERAL.BUTTON.RUN" | translate }}
+                      <span class="bi bi-play-fill mt-3 space-icon"></span>
+                    </button>
+                    <button class="btn btn-danger p-3" id="cleanCommands" type="button" (click)="clear()">
+                      {{ "GENERAL.BUTTON.DELETE" | translate }}
+                      <span class="bi bi-trash-fill space-icon"></span>
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-          </fieldset>
-        </div>
-      </section>
+            </fieldset>
+          </div>
+        </section>
 
-      <footer>
         <div class="col-12">
-          <app-terminal [isRunning]="isRunning"
-                        [showConsent]="showConsentModal"
-                        [isRecordingLog]="isRecordingLog"
-                        [isDownloadReady]="isDownloadReady"
-                        (acceptConsent)="onConsentAccepted()"
-                        (cancelConsent)="onConsentCancelled()"
-                        (downloadAction)="downloadLog()">
+          <app-terminal [isRunning]="isRunning" [showConsent]="showConsentModal" [isRecordingLog]="isRecordingLog"
+            [isDownloadReady]="isDownloadReady" (acceptConsent)="onConsentAccepted()"
+            (cancelConsent)="onConsentCancelled()" (downloadAction)="downloadLog()">
           </app-terminal>
         </div>
-      </footer>
+      </div>
 
+      <footer class="d-flex flex-row justify-content-start align-items-center">
+        <img src="../assets/images/logo_lumia.png" alt="Logo Lumia" class="logo-lumia" />
+        <div class="vr mx-4 my-3"></div>
+        <div class="footer-copy-text d-flex flex-column">
+          <p>&copy; 2026 {{ "GENERAL.FOOTER.COPYRIGHT" | translate }}</p>
+          <p>{{ "GENERAL.FOOTER.ALL_RIGHTS" | translate }}</p>
+        </div>
+        <span class="ms-auto">{{ "GENERAL.FOOTER.VERSION" | translate }} 1.0.0</span>
+      </footer>
     </div>
   </div>
 </div>

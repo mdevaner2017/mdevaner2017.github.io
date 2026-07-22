@@ -7,30 +7,40 @@
 
         <div id="ivprog-term" class="bash-body ivprog-term-div">
             <div id="ivprog-terminal-inputdiv">
-                
+
                 <div *ngIf="showConsent" id="terminal-consent-box" tabindex="-1" style="color: white; outline: none;">
                     <h3>{{ 'CONSENT_MODAL.TITLE' | translate }}</h3>
                     <p>{{ 'CONSENT_MODAL.DESCRIPTION' | translate }}</p>
                     <div class="modal-actions mt-3">
                         <button class="btn btn-success me-2" (click)="acceptConsent.emit()">Prosseguir</button>
-                        <button class="btn btn-danger" style="background-color: #ff6b6b; border-color: #ff6b6b;" (click)="cancelConsent.emit()">Cancelar</button>
+                        <button class="btn btn-danger" style="background-color: #ff6b6b; border-color: #ff6b6b;"
+                            (click)="cancelConsent.emit()">Cancelar</button>
                     </div>
                 </div>
 
-                <div *ngIf="isRecordingLog" id="log-recording-message" tabindex="-1" aria-live="assertive" style="color: #4CAF50; outline: none; font-weight: bold; font-size: 1.1rem; padding: 10px;">
-                    [LOG] Gravando atividade<span class="loading-dots"></span>
+                <div *ngIf="isRecordingLog" id="log-recording-message" tabindex="-1" aria-live="assertive"
+                    class="recording-log-container" style="outline: none;">
+                    <p class="log-ready">[LOG] Monitoramento pronto. Aguardando interações...</p>
+                    <p class="log-recording">[LOG] Gravando atividade<span class="loading-dots">...</span></p>
+                    <p class="log-description">
+                        A gravação está em andamento. Todas as interações estão sendo registradas.<br>
+                        Para encerrar a gravação, clique no botão "Encerrar Gravação".
+                    </p>
                 </div>
 
-                <div *ngIf="isDownloadReady" id="terminal-download-box" tabindex="-1" style="color: white; outline: none; padding: 10px;">
+                <div *ngIf="isDownloadReady" id="terminal-download-box" tabindex="-1"
+                    style="color: white; outline: none; padding: 10px;">
                     <span style="color: #FFEB3B; font-weight: bold;">Gravação finalizada.</span>
-                    <button id="btn-download-log" class="btn btn-link p-0 ms-2" style="color: #82b1ff; text-decoration: underline;" (click)="downloadAction.emit()">Baixar relatório da atividade</button>
+                    <button id="btn-download-log" class="btn btn-link p-0 ms-2"
+                        style="color: #82b1ff; text-decoration: underline;" (click)="downloadAction.emit()">Baixar
+                        relatório da atividade</button>
                 </div>
 
-                <div id="cmd" *ngIf="!showConsent && !isRecordingLog && !isDownloadReady">
+                <div id="cmd" *ngIf="!showConsent && !isDownloadReady">
                     <div id="cursor"></div>
 
                     <div *ngIf="isRunning" tabindex="0" id="textTerminal">
-                        <span  tabindex="0">{{ "TERMINAL.START" | translate }}</span>
+                        <span tabindex="0">{{ "TERMINAL.START" | translate }}</span>
                         <span tabindex="0" id="terminalOutput"></span>
                         <span tabindex="0">{{ "TERMINAL.FINISH" | translate }}</span>
                     </div>

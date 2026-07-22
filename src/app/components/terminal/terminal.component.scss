@@ -59,10 +59,36 @@ p {
     margin: 0;
 }
 
-.loading-dots::after {
-    content: '...';
+.recording-log-container {
+    padding: 10px;
+    font-family: courier, monospace;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.log-ready {
+    color: #4CAF50; /* Verde escuro/legível */
+    margin-bottom: 8px;
+}
+
+.log-recording {
+    color: #FF9800; /* Laranja */
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.log-description {
+    color: #E0E0E0; /* Branco cinza para leitura */
+    margin-top: 12px;
+}
+
+.loading-dots {
+    display: inline-block;
+    color: #FF9800;
+    letter-spacing: 2px;
     animation: pulsar 1.2s infinite alternate;
 }
+
 @keyframes pulsar {
     0% { opacity: 0.2; }
     100% { opacity: 1; }

@@ -15,8 +15,8 @@
     "MENU": {
       "START": "Ir para Área de Comandos",
       "ALT_I": "ALT + I Ir para Área de Comandos",
-      "TERMINAL": "Ir para o terminal",
-      "ALT_T": "ALT + T Ir para o terminal",
+      "MONITORING": "Ir para monitoramento",
+      "ALT_G": "ALT + G Ir para monitoramento",
       "COMANDS": "Ir para a lista de comandos",
       "ALT_C": "ALT + C Ir para a lista de comandos",
       "PROGRAM": "Executar programa",
@@ -68,7 +68,12 @@
     "REPEAT": "Repita_Para",
     "REPEAT_FROM": "De",
     "REPEAT_TO": "Até",
-    "REPEAT_THEN": "Faça"
+    "REPEAT_THEN": "Faça",
+    "FOOTER": {
+      "COPYRIGHT": "LUMIA - Laboratório de Usabilidade, Mídias e Inteligência Artificial.",
+      "ALL_RIGHTS": "Todos os direitos reservados.",
+      "VERSION": "Versão"
+    }
   },
   "ACCESSIBLE_MATH": {
     "MULTIPLY": "vezes",

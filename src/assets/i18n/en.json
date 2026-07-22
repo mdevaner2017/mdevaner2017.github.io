@@ -15,8 +15,8 @@
     "MENU": {
       "START": "Go to Commands Area",
       "ALT_I": "ALT + I Go to Commands Area",
-      "TERMINAL": "Go to terminal",
-      "ALT_T": "ALT + T Go to terminal",
+      "MONITORING": "Go to monitoring",
+      "ALT_G": "ALT + G Go to monitoring",
       "COMANDS": "Go to command list",
       "ALT_C": "ALT + C Go to command list",
       "PROGRAM": "Run program",
@@ -68,7 +68,12 @@
     "REPEAT": "repeat_to",
     "REPEAT_FROM": "from",
     "REPEAT_TO": "to",
-    "REPEAT_THEN": "then"
+    "REPEAT_THEN": "then",
+    "FOOTER": {
+      "COPYRIGHT": "LUMIA - Laboratory of Usability, Media and Artificial Intelligence.",
+      "ALL_RIGHTS": "All rights reserved.",
+      "VERSION": "Version"
+    }
   },
   "ACCESSIBLE_MATH": {
     "MULTIPLY": "times",

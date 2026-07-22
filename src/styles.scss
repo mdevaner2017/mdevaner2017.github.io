@@ -6,17 +6,20 @@
 @import "~@ng-select/ng-select/themes/default.theme.css";
 
 
-.back-blue{
-    background-color: #286daf;
+.back-blue {
+    background-color: #002350;
 }
-.color-white{
+
+.color-white {
     color: white;
 }
-.back-white{
+
+.back-white {
     background-color: white;
 }
 
-.btn-primary:focus, .btn-primary.focus {
+.btn-primary:focus,
+.btn-primary.focus {
     color: #fff;
     background-color: #0069d9;
     border-color: #0062cc;
@@ -34,29 +37,34 @@
     border: 0;
 }
 
-.btn-transparent{
+.btn-transparent {
     background-color: transparent;
     border: none;
 }
 
-.btn-transparent:focus, .btn-transparent.focus {
+.btn-transparent:focus,
+.btn-transparent.focus {
     outline: none;
     box-shadow: 0 0 0 0.2rem rgb(38 143 255 / 50%);
 }
 
-.bi-lock-fill::before, .bi-unlock-fill::before{
-    color:#17a2b8 !important;
+.bi-lock-fill::before,
+.bi-unlock-fill::before {
+    color: #17a2b8 !important;
 }
-.bi-pen-fill::before{
+
+.bi-pen-fill::before {
     color: midnightblue;
 }
-.back{
+
+.back {
     width: 100%;
     background-color: antiquewhite;
     border: solid 1px darkgray;
     border-radius: 10px;
 }
-p:focus{
+
+p:focus {
     color: #3083ff;
 }
 
