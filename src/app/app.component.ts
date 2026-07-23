@@ -14,6 +14,7 @@ declare var vcat: any;
 })
 export class AppComponent {
   title = 'ivprog';
+  isMenuCollapsed = true;
   private pressedAlt: boolean = false;
   components: Array<any> = [];
   isRunning: boolean = false;
