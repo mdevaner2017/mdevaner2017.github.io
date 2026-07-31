@@ -432,7 +432,7 @@ export class AppComponent {
   }
 
   goToStart() {
-    document.getElementById('inicio')?.focus();
+    document.getElementById('area-comandos')?.focus();
   }
 
   goToGravarAtividade() {
