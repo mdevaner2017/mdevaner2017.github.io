@@ -1,11 +1,11 @@
-<div class="container-fluid px-3 px-md-4">
+<div class="app-main">
   <nav [attr.aria-label]="'ACCESSIBILITY.SKIP_LINKS' | translate">
     <a href="#area-comandos" class="visually-hidden-focusable">Saltar para Área de Comandos</a>
     <a href="#btn-gravar-atividade" class="visually-hidden-focusable">Saltar para Gravar Atividade</a>
     <a href="#btn-dropdown-comandos" class="visually-hidden-focusable">Saltar para Lista de Comandos</a>
   </nav>
-  <div class="d-flex justify-content-center mt-5">
-    <div class="back-blue col-12 col-xl-10 col-lg-11 col-md-12 mt-5 rounded">
+  <div class="app-container d-flex justify-content-center px-4">
+    <div class="back-blue rounded">
       <header class="d-flex align-items-center py-4 px-4">
         <nav class="navbar navbar-expand-xl navbar-dark" [attr.aria-label]="'ACCESSIBILITY.MAIN_MENU' | translate">
           <button class="navbar-toggler" type="button" (click)="isMenuCollapsed = !isMenuCollapsed"
