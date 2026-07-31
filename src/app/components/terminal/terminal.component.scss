@@ -16,7 +16,7 @@
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
     background: #f7f7f7;
-    background: linear-gradient(to bottom, #f7f7f7 0%,#B8B8B8 100%);
+    background: linear-gradient(to bottom, #f7f7f7 0%, #B8B8B8 100%);
 }
 
 .bash-body {
@@ -67,18 +67,21 @@ p {
 }
 
 .log-ready {
-    color: #4CAF50; /* Verde escuro/legível */
+    color: #4CAF50;
+    /* Verde escuro/legível */
     margin-bottom: 8px;
 }
 
 .log-recording {
-    color: #FF9800; /* Laranja */
+    color: #FF9800;
+    /* Laranja */
     margin-bottom: 8px;
     font-weight: bold;
 }
 
 .log-description {
-    color: #E0E0E0; /* Branco cinza para leitura */
+    color: #E0E0E0;
+    /* Branco cinza para leitura */
     margin-top: 12px;
 }
 
@@ -90,6 +93,29 @@ p {
 }
 
 @keyframes pulsar {
-    0% { opacity: 0.2; }
-    100% { opacity: 1; }
+    0% {
+        opacity: 0.2;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.btn-download-log {
+    background-color: #102a6c;
+    color: #ffffff;
+    border: none;
+
+    &:hover,
+    &:focus {
+        background-color: #1a3c8e;
+        color: #ffffff;
+        box-shadow: 0 0 0 2px #cccccc;
+    }
+
+    .bi {
+        font-size: 20px;
+        font-weight: bold;
+    }
 }

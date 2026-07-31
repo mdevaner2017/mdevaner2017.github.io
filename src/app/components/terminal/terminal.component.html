@@ -29,11 +29,12 @@
                 </div>
 
                 <div *ngIf="isDownloadReady" id="terminal-download-box" tabindex="-1"
-                    style="color: white; outline: none; padding: 10px;">
-                    <span style="color: #FFEB3B; font-weight: bold;">Gravação finalizada.</span>
-                    <button id="btn-download-log" class="btn btn-link p-0 ms-2"
-                        style="color: #82b1ff; text-decoration: underline;" (click)="downloadAction.emit()">Baixar
-                        relatório da atividade</button>
+                    style="color: white; outline: none; padding: 10px;" class="d-flex flex-column align-items-start">
+                    <span style="color: #FFEB3B; font-weight: bold; margin-bottom: 12px;">Gravação finalizada.</span>
+                    <button id="btn-download-log" class="btn btn-warning btn-download-log"
+                        (click)="downloadAction.emit()">
+                        <span class="bi bi-download me-2"></span> Baixar relatório da atividade
+                    </button>
                 </div>
 
                 <div id="cmd" *ngIf="!showConsent && !isDownloadReady">
