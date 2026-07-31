@@ -9,7 +9,7 @@
     "TRUE": "true",
     "FALSE": "false",
     "LANGUAGES": {
-      "PORTUGUESE": "Portuguese",
+      "PORTUGUESE": "Português",
       "ENGLISH": "English"
     },
     "MENU": {
@@ -138,6 +138,7 @@
     "MAIN_MENU": "Main Menu",
     "TOGGLE_NAVIGATION": "Toggle navigation",
     "LOGO_IVPROG": "iVProg Forms Logo",
-    "LOGO_LUMIA": "Lumia Logo"
+    "LOGO_LUMIA": "Lumia Logo",
+    "SELECT_LANGUAGE": "Select language"
   }
 }

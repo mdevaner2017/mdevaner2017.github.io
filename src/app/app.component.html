@@ -9,14 +9,15 @@
       <header class="d-flex align-items-center py-4 px-4">
         <nav class="navbar navbar-expand-xl navbar-dark" [attr.aria-label]="'ACCESSIBILITY.MAIN_MENU' | translate">
           <button class="navbar-toggler" type="button" (click)="isMenuCollapsed = !isMenuCollapsed"
-            aria-controls="navbarNav" [attr.aria-expanded]="!isMenuCollapsed" [attr.aria-label]="'ACCESSIBILITY.TOGGLE_NAVIGATION' | translate">
+            aria-controls="navbarNav" [attr.aria-expanded]="!isMenuCollapsed"
+            [attr.aria-label]="'ACCESSIBILITY.TOGGLE_NAVIGATION' | translate">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarNav" [ngbCollapse]="isMenuCollapsed">
             <ul class="navbar-nav">
               <li class="nav-item">
-                <a class="nav-link" accesskey="ALT + I" href="#area-comandos" (click)="goToStart()" (keyup.space)="goToStart()"
-                  [title]="'GENERAL.MENU.ALT_I' | translate">
+                <a class="nav-link" accesskey="ALT + I" href="#area-comandos" (click)="goToStart()"
+                  (keyup.space)="goToStart()" [title]="'GENERAL.MENU.ALT_I' | translate">
                   <span class="box-link">1</span>
                   <span aria-hidden="true">{{ "GENERAL.MENU.START" | translate}}</span>
                 </a>
@@ -40,19 +41,30 @@
           </div>
 
 
-          <!-- <button class="button-flag" (click)="changeLanguage('pt')"
-          title="{{ 'GENERAL.LANGUAGES.PORTUGUESE' | translate }}">
-          <img src="../assets/images/brazil.svg" width="30" />
-          </button>
-          
-          <button class="button-flag" (click)="changeLanguage('en')"
-          title="{{ 'GENERAL.LANGUAGES.ENGLISH' | translate }}">
-          <img src="../assets/images/united-states.svg" width="29" />
-          </button> -->
-
-
         </nav>
-        <img src="../assets/images/logo_VprogForms.png" [attr.alt]="'ACCESSIBILITY.LOGO_IVPROG' | translate" class="ms-auto logo-ivprog" />
+        <div class="d-flex ms-auto align-items-center gap-2 gap-md-3">
+          <div ngbDropdown class="d-inline-block">
+            <button class="btn btn-outline-light d-flex align-items-center gap-2" id="dropdownLanguage"
+              ngbDropdownToggle [attr.aria-label]="'ACCESSIBILITY.SELECT_LANGUAGE' | translate"
+              [title]="'ACCESSIBILITY.SELECT_LANGUAGE' | translate">
+              <i class="bi bi-globe" aria-hidden="true"></i>
+              <span>{{ currentLanguage | uppercase }}</span>
+            </button>
+
+            <div ngbDropdownMenu aria-labelledby="dropdownLanguage">
+              <button class="dropdown-item" tabindex="0" (click)="changeLanguage('pt')"
+                [class.active]="currentLanguage === 'pt'">
+                {{ 'GENERAL.LANGUAGES.PORTUGUESE' | translate }}
+              </button>
+              <button class="dropdown-item" tabindex="0" (click)="changeLanguage('en')"
+                [class.active]="currentLanguage === 'en'">
+                {{ 'GENERAL.LANGUAGES.ENGLISH' | translate }}
+              </button>
+            </div>
+          </div>
+          <img src="../assets/images/logo_VprogForms.png" [attr.alt]="'ACCESSIBILITY.LOGO_IVPROG' | translate"
+            class="logo-ivprog ms-2" />
+        </div>
       </header>
 
       <div id="area-comandos-terminal" class="d-flex flex-column">
@@ -130,7 +142,8 @@
       </div>
 
       <footer class="d-flex flex-column flex-md-row justify-content-start align-items-center text-center text-md-start">
-        <img src="../assets/images/logo_lumia.png" [attr.alt]="'ACCESSIBILITY.LOGO_LUMIA' | translate" class="logo-lumia mb-3 mb-md-0" />
+        <img src="../assets/images/logo_lumia.png" [attr.alt]="'ACCESSIBILITY.LOGO_LUMIA' | translate"
+          class="logo-lumia mb-3 mb-md-0" />
         <div class="vr d-none d-md-block mx-4 my-3"></div>
         <div class="footer-copy-text d-flex flex-column mb-3 mb-md-0">
           <p>&copy; 2026 {{ "GENERAL.FOOTER.COPYRIGHT" | translate }}</p>

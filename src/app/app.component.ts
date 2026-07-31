@@ -57,6 +57,10 @@ export class AppComponent {
     this.translate.use(language);
   }
 
+  get currentLanguage() {
+    return this.translate.currentLang || this.translate.defaultLang;
+  }
+
   getVariables() {
     return this.components ? this.components.filter(c => c.type == TypesEnum.VARIABLE) : [];
   }

@@ -10,7 +10,7 @@
     "FALSE": "falso",
     "LANGUAGES": {
       "PORTUGUESE": "Português",
-      "ENGLISH": "Inglês"
+      "ENGLISH": "English"
     },
     "MENU": {
       "START": "Ir para Área de Comandos",
@@ -138,6 +138,7 @@
     "MAIN_MENU": "Menu Principal",
     "TOGGLE_NAVIGATION": "Alternar navegação",
     "LOGO_IVPROG": "Logo iVProg Forms",
-    "LOGO_LUMIA": "Logo Lumia"
+    "LOGO_LUMIA": "Logo Lumia",
+    "SELECT_LANGUAGE": "Selecionar idioma"
   }
 }
