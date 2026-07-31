@@ -1,5 +1,5 @@
 <div class="container-fluid px-3 px-md-4">
-  <nav aria-label="Links de Salto">
+  <nav [attr.aria-label]="'ACCESSIBILITY.SKIP_LINKS' | translate">
     <a href="#area-comandos" class="visually-hidden-focusable">Saltar para Área de Comandos</a>
     <a href="#btn-gravar-atividade" class="visually-hidden-focusable">Saltar para Gravar Atividade</a>
     <a href="#btn-dropdown-comandos" class="visually-hidden-focusable">Saltar para Lista de Comandos</a>
@@ -7,9 +7,9 @@
   <div class="d-flex justify-content-center mt-5">
     <div class="back-blue col-12 col-xl-10 col-lg-11 col-md-12 mt-5 rounded">
       <header class="d-flex align-items-center py-4 px-4">
-        <nav class="navbar navbar-expand-xl navbar-dark" aria-label="Menu Principal">
+        <nav class="navbar navbar-expand-xl navbar-dark" [attr.aria-label]="'ACCESSIBILITY.MAIN_MENU' | translate">
           <button class="navbar-toggler" type="button" (click)="isMenuCollapsed = !isMenuCollapsed"
-            aria-controls="navbarNav" [attr.aria-expanded]="!isMenuCollapsed" aria-label="Alternar navegação">
+            aria-controls="navbarNav" [attr.aria-expanded]="!isMenuCollapsed" [attr.aria-label]="'ACCESSIBILITY.TOGGLE_NAVIGATION' | translate">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarNav" [ngbCollapse]="isMenuCollapsed">
@@ -52,11 +52,11 @@
 
 
         </nav>
-        <img src="../assets/images/logo_VprogForms.png" alt="Logo iVProg Forms" class="ms-auto logo-ivprog" />
+        <img src="../assets/images/logo_VprogForms.png" [attr.alt]="'ACCESSIBILITY.LOGO_IVPROG' | translate" class="ms-auto logo-ivprog" />
       </header>
 
       <div id="area-comandos-terminal" class="d-flex flex-column">
-        <section id="area-comandos" role="region" aria-label="Área de Comandos" tabindex="-1">
+        <section id="area-comandos" role="region" [attr.aria-label]="'GENERAL.TITLE' | translate" tabindex="-1">
           <div class="col-12 px-4 pt-4">
             <fieldset>
               <legend class="p-1">
@@ -130,7 +130,7 @@
       </div>
 
       <footer class="d-flex flex-column flex-md-row justify-content-start align-items-center text-center text-md-start">
-        <img src="../assets/images/logo_lumia.png" alt="Logo Lumia" class="logo-lumia mb-3 mb-md-0" />
+        <img src="../assets/images/logo_lumia.png" [attr.alt]="'ACCESSIBILITY.LOGO_LUMIA' | translate" class="logo-lumia mb-3 mb-md-0" />
         <div class="vr d-none d-md-block mx-4 my-3"></div>
         <div class="footer-copy-text d-flex flex-column mb-3 mb-md-0">
           <p>&copy; 2026 {{ "GENERAL.FOOTER.COPYRIGHT" | translate }}</p>

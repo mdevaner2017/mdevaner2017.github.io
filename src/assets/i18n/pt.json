@@ -105,7 +105,8 @@
     "REAL": "real",
     "TEXT": "texto",
     "LOGIC": "lógico",
-    "TYPE": "Tipo Variável"
+    "TYPE": "Tipo Variável",
+    "NAME": "nome da variável"
   },
   "WRITE": {
     "SELECT_OPERATION": "Selecione a variável para atribuir a operação"
@@ -131,5 +132,12 @@
     "CHECKBOX": "Compreendo as informações acima e consinto com o monitoramento da minha atividade.",
     "CANCEL": "Cancelar",
     "CONSENT": "Consentir"
+  },
+  "ACCESSIBILITY": {
+    "SKIP_LINKS": "Links de Salto",
+    "MAIN_MENU": "Menu Principal",
+    "TOGGLE_NAVIGATION": "Alternar navegação",
+    "LOGO_IVPROG": "Logo iVProg Forms",
+    "LOGO_LUMIA": "Logo Lumia"
   }
 }

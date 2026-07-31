@@ -105,7 +105,8 @@
     "REAL": "real",
     "TEXT": "text",
     "LOGIC": "logical",
-    "TYPE": "Variable Type"
+    "TYPE": "Variable Type",
+    "NAME": "variable name"
   },
   "WRITE": {
     "SELECT_OPERATION": "Select the variable to assign the operation"
@@ -131,5 +132,12 @@
     "CHECKBOX": "I understand the information above and consent to the monitoring of my activity.",
     "CANCEL": "Cancel",
     "CONSENT": "Consent"
+  },
+  "ACCESSIBILITY": {
+    "SKIP_LINKS": "Skip Links",
+    "MAIN_MENU": "Main Menu",
+    "TOGGLE_NAVIGATION": "Toggle navigation",
+    "LOGO_IVPROG": "iVProg Forms Logo",
+    "LOGO_LUMIA": "Lumia Logo"
   }
 }
